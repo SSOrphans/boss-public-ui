@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Merchant Information</th>
+    <th>Amount</th>
+    <th>New Balance</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let transaction of transactions">
+    <td>{{transaction.date}}</td>
+    <td>{{transaction.merchant}}</td>
+    <td>{{transaction.amount}}</td>
+    <td>{{transaction.balance}}</td>
+    <td>{{transaction.pending? "Posted":"Pending"}}</td>
+  </tr>
+  </tbody>
+
+</table>
