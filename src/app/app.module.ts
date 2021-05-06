@@ -8,13 +8,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule, DatePipe} from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import {HttpService} from './shared/services/http.service';
-import {TransactionViewComponent} from './transaction-component/transaction-view/transaction-view.component';
-import {TransactionTableComponent} from './transaction-component/transaction-table/transaction-table.component';
-import { TransactionSearchComponent } from './transaction-component/transaction-queries/transaction-search/transaction-search.component';
+import {HttpService} from './transaction-component/services/http.service';
+import {TransactionViewComponent} from './transaction-component/components/transaction-view/transaction-view.component';
+import {TransactionTableComponent} from './transaction-component/components/transaction-view/transaction-table/transaction-table.component';
+import { TransactionSearchComponent } from './transaction-component/components/transaction-view/transaction-queries/transaction-search/transaction-search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TransactionFilterComponent } from './transaction-component/transaction-queries/transaction-filter/transaction-filter.component';
-import { TransactionQueriesComponent } from './transaction-component/transaction-queries/transaction-queries.component';
+import { TransactionFilterComponent } from './transaction-component/components/transaction-view/transaction-queries/transaction-filter/transaction-filter.component';
+import { TransactionQueriesComponent } from './transaction-component/components/transaction-view/transaction-queries/transaction-queries.component';
 
 
 @NgModule({

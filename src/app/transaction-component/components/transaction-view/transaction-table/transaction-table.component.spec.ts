@@ -2,11 +2,11 @@ import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 import {SimpleChange} from '@angular/core';
 import {TransactionTableComponent} from './transaction-table.component';
 import {BrowserModule} from '@angular/platform-browser';
-import {AppRoutingModule} from '../../app-routing.module';
+import {AppRoutingModule} from '../../../../app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule, DatePipe} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpService} from '../../shared/services/http.service';
+import {HttpService} from '../../../services/http.service';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
 

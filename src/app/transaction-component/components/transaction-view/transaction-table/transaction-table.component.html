@@ -1,0 +1,57 @@
+<div fxLayout="column" fxLayoutAlign="space-evenly center">
+<table class="table">
+  <thead>
+  <tr>
+    <th (click)="sort('date')">
+      <div fxLayout="row" fxLayoutAlign="space-between center">Date
+        <fa-icon [icon]="faSortDown"></fa-icon>
+      </div>
+    </th>
+    <th>
+      <div fxLayout="row" fxLayoutAlign="space-between center">Merchant Information
+        <fa-icon [icon]="faSortDown"></fa-icon>
+      </div>
+    </th>
+    <th>
+      <div fxLayout="row" fxLayoutAlign="space-between center">Amount
+        <fa-icon [icon]="faSortDown"></fa-icon>
+      </div>
+    </th>
+    <th>
+      <div fxLayout="row" fxLayoutAlign="space-between center">New Balance
+        <fa-icon [icon]="faSortDown"></fa-icon>
+      </div>
+    </th>
+    <th>
+      <div fxLayout="row" fxLayoutAlign="space-between center">Status
+        <fa-icon [icon]="faSortDown"></fa-icon>
+      </div>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let transaction of transactions">
+    <td>{{transaction.date}}</td>
+    <td>{{transaction.merchant}}</td>
+    <td>{{transaction.amount}}</td>
+    <td>{{transaction.balance}}</td>
+    <td>{{transaction.pending ? "Posted" : "Pending"}}</td>
+  </tr>
+  </tbody>
+
+</table>
+
+<ngb-pagination
+
+  [pageSize]="limit"
+  [collectionSize]="collectionSize"
+  [(page)]="page"
+  [maxSize]="5"
+  [rotate]="true"
+  [boundaryLinks]="true"
+  (pageChange)="onPageChange(page)"
+>
+
+</ngb-pagination>
+</div>
+
