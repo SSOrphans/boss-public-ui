@@ -12,6 +12,9 @@ import {TransactionViewComponent} from './transaction-component/transaction-view
 import {TransactionTableComponent} from './transaction-component/transaction-table/transaction-table.component';
 import { TransactionSearchComponent } from './transaction-component/transaction-search/transaction-search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ProfileComponent } from './user/profile/profile.component';
+import { ViewProfileComponent } from './user/profile/view-profile/view-profile.component';
+import { UpdateProfileComponent } from './user/profile/update-profile/update-profile.component';
 
 
 @NgModule({
@@ -20,6 +23,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TransactionViewComponent,
     TransactionTableComponent,
     TransactionSearchComponent,
+    ProfileComponent,
+    ViewProfileComponent,
+    UpdateProfileComponent,
   ],
   imports: [
     BrowserModule,
