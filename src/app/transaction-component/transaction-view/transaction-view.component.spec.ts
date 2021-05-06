@@ -23,4 +23,9 @@ describe('TransactionViewComponent', () => {
     fixture.detectChanges();
     expect(component.keywordFromParent).toEqual('test');
   });
+  it('should update the filterFromParent', () => {
+    component.onFilter('test');
+    fixture.detectChanges();
+    expect(component.filterFromParent).toEqual('test');
+  });
 });

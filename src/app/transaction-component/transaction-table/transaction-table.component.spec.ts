@@ -87,4 +87,13 @@ describe('TransactionTableComponent', () => {
     expect(component.keyword).toEqual('changeTest');
 
   });
+
+  it('should change the value of keyword', () => {
+    spyOn(httpService, 'findAllTransactions').and.returnValue(stubbedTransactions);
+    const filterToTableComponent = new SimpleChange(undefined, 'changeTest', false);
+    component.ngOnChanges({filterToTableComponent});
+    fixture.detectChanges();
+    expect(component.filter).toEqual('changeTest');
+
+  });
 });
