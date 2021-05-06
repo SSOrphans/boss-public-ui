@@ -27,11 +27,13 @@ export class TransactionTableComponent implements OnInit, OnChanges {
   @Input() filterToTableComponent: string | undefined;
 
   ngOnInit(): void {
+    console.log('init');
     this.initializeTransactions();
     this.loadTransactions();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('something changed');
     this.keyword = '';
     if (changes.keywordToTableComponent && changes.keywordToTableComponent.currentValue) {
       this.keyword = changes.keywordToTableComponent.currentValue;
@@ -43,11 +45,13 @@ export class TransactionTableComponent implements OnInit, OnChanges {
   }
 
   onPageChange(page: number): void {
+    console.log('page change');
     this.page = page - 1;
     this.loadTransactions();
   }
 
   loadTransactions(): void {
+    console.log('loading transactions');
     const id = this.route.snapshot.params.id;
     const keywordQuery = this.keyword ? 'keyword=' + this.keyword : '';
     const pageQuery = this.page ? 'offset=' + this.page : '';
