@@ -20,17 +20,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-
   it(`should have as title 'Bank of Smoothstack'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('Bank of Smoothstack');
-  });
-
-  it('should set the title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const title = TestBed.inject(Title);
-    fixture.detectChanges();
-    expect(title.getTitle()).toBe('Bank of Smoothstack');
   });
 });

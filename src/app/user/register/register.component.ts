@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserHttpService } from 'src/app/shared/services/user-http.service';
-import { catchError, take } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {UserHttpService} from '../../shared/services/user-http.service';
+import {catchError, take} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -14,9 +14,10 @@ export class RegisterComponent implements OnInit {
   emptyFormMsg?: string;
   requiredFieldMarker?: string;
   registerForm!: FormGroup;
-  disableSubmitBtn: boolean = false;
+  disableSubmitBtn = false;
 
-  constructor(private userService: UserHttpService, private redirect: Router) {}
+  constructor(private userService: UserHttpService, private redirect: Router) {
+  }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -49,11 +50,11 @@ export class RegisterComponent implements OnInit {
     this.createUser();
   }
 
-  get userInput() {
+  get userInput(): any {
     return this.registerForm.controls;
   }
 
-  createUser() {
+  createUser(): void {
     this.disableSubmitBtn = true;
     this.registerForm.disable();
     this.userService
@@ -72,7 +73,7 @@ export class RegisterComponent implements OnInit {
         () => {
           this.redirect.navigate(['/home']);
         },
-        (err) => {
+        (err: any) => {
           if (err.status === 409) {
             this.emptyFormMsg = err.error + '.';
           } else {

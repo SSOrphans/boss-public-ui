@@ -2,11 +2,11 @@ import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 import {SimpleChange} from '@angular/core';
 import {TransactionTableComponent} from './transaction-table.component';
 import {BrowserModule} from '@angular/platform-browser';
-import {AppRoutingModule} from '../../app-routing.module';
+import {AppRoutingModule} from '../../../../app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule, DatePipe} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpService} from '../../shared/services/http.service';
+import {HttpService} from '../../../../shared/services/http.service';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
 
@@ -45,6 +45,7 @@ describe('TransactionTableComponent', () => {
     fixture.detectChanges();
     stubbedTransactions = [{
       date: new Date().toDateString(),
+      type: 'TestType',
       merchantName: 'TestMerchant',
       amount: 123.45,
       newBalance: 12345.67,
@@ -66,15 +67,16 @@ describe('TransactionTableComponent', () => {
   it('should call transaction subscribe', fakeAsync(() => {
     const findAllTransactionSpy = spyOn(httpService, 'findAllTransactions').and.returnValue(of(stubbedTransactions));
     const subSpy = spyOn(httpService.findAllTransactions(''), 'subscribe');
-    component.ngOnInit();
+    component.loadTransactions();
     tick();
     expect(findAllTransactionSpy).toHaveBeenCalledBefore(subSpy);
     expect(subSpy).toHaveBeenCalled();
   }));
 
   it('should format the transaction', fakeAsync(() => {
-    spyOn(httpService, 'findAllTransactions').and.returnValue(of(stubbedTransactions));
-    component.ngOnInit();
+    spyOn(httpService, 'findAllTransactions').and.returnValue(of({ transactions: stubbedTransactions}));
+    component.loadTransactions();
+    fixture.detectChanges();
     expect(component.transactions).toBeDefined();
     expect(component.transactions).toEqual(stubbedTransactions);
   }));
