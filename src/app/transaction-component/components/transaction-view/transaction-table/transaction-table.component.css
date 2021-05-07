@@ -1,0 +1,4 @@
+th.transaction-table:hover {
+  background: lightgray;
+  cursor: pointer;
+}

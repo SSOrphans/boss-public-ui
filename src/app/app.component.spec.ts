@@ -1,18 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './shared/layout/navbar/navbar.component';
+
 import {Title} from '@angular/platform-browser';
 
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [RouterTestingModule],
+      declarations: [AppComponent, NavbarComponent],
     }).compileComponents();
   });
 
@@ -32,6 +30,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const title = TestBed.inject(Title);
     fixture.detectChanges();
-    expect(title.getTitle()).toBe('Bank of Smoothstack');
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('.content span').textContent).toContain('boss-public-ui app is running!');
   });
 });

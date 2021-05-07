@@ -6,7 +6,7 @@ import {AppRoutingModule} from '../../../../app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule, DatePipe} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpService} from '../../../services/http.service';
+import {HttpService} from '../../../../shared/services/http.service';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
 

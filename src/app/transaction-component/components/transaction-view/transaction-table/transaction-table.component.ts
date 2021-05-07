@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {HttpService} from 'src/app/transaction-component/services/http.service';
+import {HttpService} from 'src/app/shared/services/http.service';
 import {DatePipe} from '@angular/common';
-import {faSortDown} from '@fortawesome/free-solid-svg-icons';
+import {faSortDown, faMoneyBillWave, faMoneyCheckAlt, faCreditCard, faHandHoldingUsd, faExchangeAlt, faCashRegister, faDonate} from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -13,27 +13,35 @@ import {faSortDown} from '@fortawesome/free-solid-svg-icons';
 export class TransactionTableComponent implements OnInit, OnChanges {
 
   faSortDown = faSortDown;
+  faMoneyBillWave = faMoneyBillWave;
+  faMoneyCheckAlt = faMoneyCheckAlt;
+  faCreditCard = faCreditCard;
+  faExchangeAlt = faExchangeAlt;
+  faCashRegister = faCashRegister;
+  faDonate = faDonate;
+
 
   constructor(private route: ActivatedRoute, private httpService: HttpService, private datePipe: DatePipe) {
   }
 
   transactions: any = [];
-  page = 0;
+  page = 1;
   limit = 5;
   collectionSize = 0;
+  sort = 'date';
   keyword: string | undefined;
   filter: string | undefined;
   @Input() keywordToTableComponent: string | undefined;
   @Input() filterToTableComponent: string | undefined;
 
   ngOnInit(): void {
-    console.log('init');
-    this.initializeTransactions();
-    this.loadTransactions();
+    this.transactions = [];
+    this.page = 1;
+    this.limit = 5;
+    this.collectionSize = 0;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('something changed');
     this.keyword = '';
     if (changes.keywordToTableComponent && changes.keywordToTableComponent.currentValue) {
       this.keyword = changes.keywordToTableComponent.currentValue;
@@ -44,47 +52,64 @@ export class TransactionTableComponent implements OnInit, OnChanges {
     this.loadTransactions();
   }
 
-  onPageChange(page: number): void {
-    console.log('page change');
-    this.page = page - 1;
+  onPageChange(): void {
+    this.loadTransactions();
+  }
+
+  onSortChange(sortIndex: number): void {
+    switch (sortIndex) {
+      case 0:
+        this.sort = 'date';
+        break;
+      case 1:
+        this.sort = 'merchantName';
+        break;
+      case 2:
+        this.sort = 'amount';
+        break;
+      case 3:
+        this.sort = 'newBalance';
+        break;
+      case 4:
+        this.sort = 'pending';
+        break;
+      case 5:
+        this.sort = 'type';
+        break;
+      default:
+        this.sort = 'date';
+        break;
+    }
+    this.page = 1;
     this.loadTransactions();
   }
 
   loadTransactions(): void {
-    console.log('loading transactions');
     const id = this.route.snapshot.params.id;
     const keywordQuery = this.keyword ? 'keyword=' + this.keyword : '';
-    const pageQuery = this.page ? 'offset=' + this.page : '';
+    const pageQuery = this.page ? 'offset=' + (this.page - 1) : '';
     const filterQuery = this.filter ? 'filter=' + this.filter : '';
-    const httpQuery = (keywordQuery || pageQuery || filterQuery) ? `?${keywordQuery}&${pageQuery}&${filterQuery}` : '';
+    const sortQuery = this.sort ? 'sortBy=' + this.sort : 'date';
+    const httpQuery = (keywordQuery || pageQuery || filterQuery || sortQuery) ?
+      `?${keywordQuery}&${pageQuery}&${filterQuery}&${sortQuery}` : '';
     try {
       this.httpService.findAllTransactions(`/api/accounts/${id}/transactions${httpQuery}`)
         .subscribe((resp: any) => {
             const httpTransactions = resp.transactions;
-            httpTransactions.forEach((transaction: { date: Date | string | null }) => {
-              transaction.date = this.datePipe.transform(transaction.date, 'MM-dd-yyyy');
-            });
+            httpTransactions.forEach(
+              (transaction: { date: Date | string | null }) => {
+                transaction.date = this.datePipe.transform(transaction.date, 'MM-dd-yyyy');
+              });
             this.transactions = httpTransactions;
             this.limit = resp.limit;
             this.page = resp.page;
             this.collectionSize = resp.limit * resp.pages;
           },
           (error: any) => {
-            this.initializeTransactions();
+            this.ngOnInit();
           });
     } catch (err) {
     }
-  }
-
-  initializeTransactions(): void {
-    this.transactions = [];
-    this.page = 0;
-    this.limit = 5;
-    this.collectionSize = 0;
-  }
-
-  sort(sortBy: string): void {
-    console.log(sortBy);
   }
 
 }
