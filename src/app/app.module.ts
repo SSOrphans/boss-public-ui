@@ -13,11 +13,11 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { HttpService } from './shared/services/http.service';
 
 // Components
-import { TransactionViewComponent } from './transaction-component/components/transaction-view/transaction-view.component';
-import { TransactionTableComponent } from './transaction-component/components/transaction-view/transaction-table/transaction-table.component';
-import { TransactionSearchComponent } from './transaction-component/components/transaction-view/transaction-queries/transaction-search/transaction-search.component';
-import { TransactionFilterComponent } from './transaction-component/components/transaction-view/transaction-queries/transaction-filter/transaction-filter.component';
-import { TransactionQueriesComponent } from './transaction-component/components/transaction-view/transaction-queries/transaction-queries.component';
+import { TransactionViewComponent } from './transaction/components/transaction-view/transaction-view.component';
+import { TransactionTableComponent } from './transaction/components/transaction-view/transaction-table/transaction-table.component';
+import { TransactionSearchComponent } from './transaction/components/transaction-view/transaction-queries/transaction-search/transaction-search.component';
+import { TransactionFilterComponent } from './transaction/components/transaction-view/transaction-queries/transaction-filter/transaction-filter.component';
+import { TransactionQueriesComponent } from './transaction/components/transaction-view/transaction-queries/transaction-queries.component';
 
 import { NavbarComponent } from './shared/layout/navbar/navbar.component';
 import { ProfileComponent } from './user/profile/profile.component';

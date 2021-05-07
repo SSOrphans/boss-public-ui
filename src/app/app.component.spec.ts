@@ -25,12 +25,4 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('Bank of Smoothstack');
   });
-
-  it('should set the title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const title = TestBed.inject(Title);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('boss-public-ui app is running!');
-  });
 });

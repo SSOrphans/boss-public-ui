@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {ActivatedRoute} from '@angular/router';
 import {HttpService} from 'src/app/shared/services/http.service';
 import {DatePipe} from '@angular/common';
-import {faSortDown, faMoneyBillWave, faMoneyCheckAlt, faCreditCard, faHandHoldingUsd, faExchangeAlt, faCashRegister, faDonate} from '@fortawesome/free-solid-svg-icons';
+import {faSortDown, faMoneyBillWave, faMoneyCheckAlt, faCreditCard, faExchangeAlt, faCashRegister, faDonate} from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({

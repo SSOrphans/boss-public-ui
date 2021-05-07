@@ -45,6 +45,7 @@ describe('TransactionTableComponent', () => {
     fixture.detectChanges();
     stubbedTransactions = [{
       date: new Date().toDateString(),
+      type: 'TestType',
       merchantName: 'TestMerchant',
       amount: 123.45,
       newBalance: 12345.67,
@@ -66,15 +67,16 @@ describe('TransactionTableComponent', () => {
   it('should call transaction subscribe', fakeAsync(() => {
     const findAllTransactionSpy = spyOn(httpService, 'findAllTransactions').and.returnValue(of(stubbedTransactions));
     const subSpy = spyOn(httpService.findAllTransactions(''), 'subscribe');
-    component.ngOnInit();
+    component.loadTransactions();
     tick();
     expect(findAllTransactionSpy).toHaveBeenCalledBefore(subSpy);
     expect(subSpy).toHaveBeenCalled();
   }));
 
   it('should format the transaction', fakeAsync(() => {
-    spyOn(httpService, 'findAllTransactions').and.returnValue(of(stubbedTransactions));
-    component.ngOnInit();
+    spyOn(httpService, 'findAllTransactions').and.returnValue(of({ transactions: stubbedTransactions}));
+    component.loadTransactions();
+    fixture.detectChanges();
     expect(component.transactions).toBeDefined();
     expect(component.transactions).toEqual(stubbedTransactions);
   }));
