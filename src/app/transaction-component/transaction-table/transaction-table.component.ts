@@ -16,14 +16,22 @@ export class TransactionTableComponent implements OnInit, OnChanges {
 
   transactions: any = [];
   keyword: string | undefined;
+  filter: string | undefined;
   @Input() keywordToTableComponent: string | undefined;
+  @Input() filterToTableComponent: string | undefined;
 
   ngOnInit(): void {
     this.initializeTransactions();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.keyword = changes.keywordToTableComponent.currentValue;
+    this.keyword = '';
+    if (changes.keywordToTableComponent && changes.keywordToTableComponent.currentValue) {
+      this.keyword = changes.keywordToTableComponent.currentValue;
+    }
+    if (changes.filterToTableComponent && changes.filterToTableComponent.currentValue) {
+      this.filter = changes.filterToTableComponent.currentValue;
+    }
     this.initializeTransactions();
   }
 
@@ -32,7 +40,8 @@ export class TransactionTableComponent implements OnInit, OnChanges {
     const page = this.route.snapshot.queryParams.page;
     const keywordQuery = this.keyword ? 'keyword=' + this.keyword : '';
     const pageQuery = page ? 'offset=' + page : '';
-    const httpQuery = (keywordQuery || pageQuery) ? `?${keywordQuery}&${pageQuery}` : '';
+    const filterQuery = this.filter ? 'filter=' + this.filter : '';
+    const httpQuery = (keywordQuery || pageQuery || filterQuery) ? `?${keywordQuery}&${pageQuery}&${filterQuery}` : '';
     try {
       this.httpService.findAllTransactions(`/api/accounts/${id}/transactions${httpQuery}`)
         .subscribe((resp: any) => {

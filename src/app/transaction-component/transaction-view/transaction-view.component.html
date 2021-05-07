@@ -1,2 +1,2 @@
-<app-transaction-search (searchEventFromSearchComponent)="onSearch($event)"></app-transaction-search>
-<app-transaction-table [keywordToTableComponent]="keywordFromParent"></app-transaction-table>
+<app-transaction-queries (searchEventFromQueriesComponent)="onSearch($event)" (filterEventFromQueriesComponent)="onFilter($event)"></app-transaction-queries>
+<app-transaction-table [keywordToTableComponent]="keywordFromParent" [filterToTableComponent]="filterFromParent"></app-transaction-table>

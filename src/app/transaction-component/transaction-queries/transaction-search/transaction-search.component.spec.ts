@@ -21,7 +21,7 @@ describe('TransactionSearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit new search', () => {
+  it('should emit new search to Query Component', () => {
     spyOn(component.searchEventFromSearchComponent, 'emit');
     component.onSearch('test');
     fixture.detectChanges();

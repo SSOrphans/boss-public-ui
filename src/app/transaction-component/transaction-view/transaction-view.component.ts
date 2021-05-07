@@ -9,6 +9,7 @@ import {Component, OnInit} from '@angular/core';
 export class TransactionViewComponent implements OnInit {
 
   keywordFromParent: string | undefined;
+  filterFromParent: string | undefined;
 
   constructor() {
   }
@@ -18,6 +19,10 @@ export class TransactionViewComponent implements OnInit {
 
   onSearch(newSearch: string): void {
     this.keywordFromParent = newSearch;
+  }
+
+  onFilter(newFilter: string): void {
+    this.filterFromParent = newFilter;
   }
 
 }

@@ -19,6 +19,10 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/layout/navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './user/register/register.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { TransactionFilterComponent } from './transaction-component/transaction-queries/transaction-filter/transaction-filter.component';
+import { TransactionQueriesComponent } from './transaction-component/transaction-queries/transaction-queries.component';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +36,8 @@ import { RegisterComponent } from './user/register/register.component';
     HomeComponent,
     NavbarComponent,
     RegisterComponent,
+    TransactionFilterComponent,
+    TransactionQueriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +47,7 @@ import { RegisterComponent } from './user/register/register.component';
     HttpClientModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
   ],
   providers: [HttpService, DatePipe],
   bootstrap: [AppComponent],
