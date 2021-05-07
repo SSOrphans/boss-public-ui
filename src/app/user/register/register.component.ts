@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserHttpService } from 'src/app/shared/services/user-http.service';
-import { catchError, first } from 'rxjs/operators';
+import { catchError, take } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 @Component({
@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
         password: this.userInput.password.value,
       })
       .pipe(
-        first(),
+        take(1),
         catchError((err) => {
           return throwError(err);
         })

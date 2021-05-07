@@ -1,6 +1,11 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { UserHttpService } from 'src/app/shared/services/user-http.service';
+import { ProfileComponent } from '../profile.component';
 import { ViewProfileComponent } from './view-profile.component';
+import { of } from 'rxjs';
 
 describe('ViewProfileComponent', () => {
   let component: ViewProfileComponent;
@@ -8,9 +13,10 @@ describe('ViewProfileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewProfileComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule, HttpClientTestingModule],
+      declarations: [ViewProfileComponent, ProfileComponent],
+      providers: [UserHttpService],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +27,27 @@ describe('ViewProfileComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('call service onInit', () => {
+    let userService = TestBed.inject(UserHttpService);
+    spyOn(userService, 'getUserProfileInfo').and.callFake(() => {
+      return of();
+    });
+
+    component.ngOnInit();
+    expect(userService.getUserProfileInfo).toHaveBeenCalled();
+  });
+
+  it('redirect to update profile', () => {
+    let redirect = TestBed.inject(Router);
+    let route = TestBed.inject(ActivatedRoute);
+    spyOn(redirect, 'navigate');
+
+    component.onUpdate();
+    expect(redirect.navigate).toHaveBeenCalledWith(
+      ['update'],
+      Object({ relativeTo: route })
+    );
   });
 });

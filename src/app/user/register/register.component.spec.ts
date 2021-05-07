@@ -4,6 +4,7 @@ import { RegisterComponent } from './register.component';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 describe('RegisterComponent', () => {
@@ -12,7 +13,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, ReactiveFormsModule],
       declarations: [RegisterComponent],
       providers: [UserHttpService],
     }).compileComponents();
@@ -24,7 +25,7 @@ describe('RegisterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('create new user', () => {
+  it('register new user', () => {
     let userService = TestBed.inject(UserHttpService);
     spyOn(userService, 'registerUser').and.callFake(() => {
       return of();
@@ -39,7 +40,7 @@ describe('RegisterComponent', () => {
     expect(userService.registerUser).toHaveBeenCalled();
   });
 
-  it('create user registration component', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 

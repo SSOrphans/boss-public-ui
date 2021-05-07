@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserHttpService } from 'src/app/shared/services/user-http.service';
 import { ProfileInfo } from '../../models/profile-info';
-import { catchError, first } from 'rxjs/operators';
+import { catchError, take } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 @Component({
@@ -25,7 +25,7 @@ export class ViewProfileComponent implements OnInit {
       // user id is hardcoded to test endpoint
       .getUserProfileInfo(1)
       .pipe(
-        first(),
+        take(1),
         catchError((err) => {
           return throwError(err);
         })
