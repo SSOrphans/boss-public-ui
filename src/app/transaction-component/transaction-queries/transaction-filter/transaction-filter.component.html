@@ -1,0 +1,16 @@
+<div class="input-group mb-3">
+  <div ngbDropdown placement="bottom-right" class="d-inline-block">
+    <button class="btn" ngbDropdownToggle>Filter
+      <fa-icon [icon]="faFilter"></fa-icon>
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button ngbDropdownItem (click)="onFilter('1')">Deposit</button>
+      <button ngbDropdownItem (click)="onFilter('2')">Withdrawal</button>
+      <button ngbDropdownItem (click)="onFilter('3')">Transfer</button>
+      <button ngbDropdownItem (click)="onFilter('4')">Payment</button>
+      <button ngbDropdownItem (click)="onFilter('5')">Check</button>
+      <button ngbDropdownItem (click)="onFilter('6')">Charge</button>
+      <button ngbDropdownItem (click)="onFilter('7')">ATM</button>
+    </div>
+  </div>
+</div>
