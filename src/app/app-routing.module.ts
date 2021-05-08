@@ -12,6 +12,7 @@ import { TransactionFilterComponent } from './transaction/components/transaction
 import { TransactionTableComponent } from './transaction/components/transaction-view/transaction-table/transaction-table.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -20,7 +21,9 @@ const routes: Routes = [
 
   { path: 'login/register', component: RegisterComponent },
 
-  { path: 'login/forgotpass', component: ForgotPasswordComponent },
+  { path: 'login/forgotpassword', component: ForgotPasswordComponent },
+
+  { path: 'login/resetpassword', component: ResetPasswordComponent },
 
   {
     path: 'profile',

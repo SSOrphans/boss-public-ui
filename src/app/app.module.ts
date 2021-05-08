@@ -28,6 +28,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './login/register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { ForgotPasswordComponent } from './login/forgot-password/forgot-password
     TransactionQueriesComponent,
     LoginComponent,
     ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

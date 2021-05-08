@@ -1,0 +1,81 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserHttpService } from 'src/app/shared/services/user-http.service';
+import { catchError, take } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
+@Component({
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.css'],
+})
+export class ResetPasswordComponent implements OnInit {
+  passwordForm: FormGroup;
+  disableSubmitBtn: boolean;
+  requiredFieldMarker?: string;
+  emptyFormMsg?: string;
+
+  constructor(private redirect: Router, private userService: UserHttpService) {
+    this.disableSubmitBtn = false;
+    this.passwordForm = new FormGroup({
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(64),
+        // must at least have 1 lower, upper, number, and special character
+        Validators.pattern(
+          '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$'
+        ),
+      ]),
+    });
+  }
+
+  ngOnInit(): void {}
+
+  get userInput(): any {
+    return this.passwordForm.controls;
+  }
+
+  submitForm() {
+    if (this.passwordForm.invalid) {
+      this.emptyFormMsg = 'Please fill out the form.';
+      this.requiredFieldMarker = '*';
+      return;
+    }
+    this.updatePassword();
+  }
+
+  updatePassword() {
+    this.disableSubmitBtn = true;
+    this.passwordForm.disable();
+    // TODO: AWS SNS; token is hardcoded for endpoint test
+    this.userService
+      .resetPass({
+        token:
+          'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJndGE1QHNzLmNvbSJ9.IiFLLRCbYd6dmhOpf6nPpp0qyqn2N1v5htNwFdOuhFWD3_y3weXZCillqCwsnXcs9ciNfuG3NA5RXV46PM7uOQ',
+        password: this.userInput.password.value,
+      })
+      .pipe(
+        take(1),
+        catchError((err) => {
+          return throwError(err);
+        })
+      )
+      .subscribe(
+        () => {
+          this.redirect.navigate(['/home']);
+        },
+        (err: any) => {
+          if (err.status === 409) {
+            this.emptyFormMsg = err.error + '.';
+          } else {
+            // TODO: redirect to 404 not found
+          }
+          this.disableSubmitBtn = false;
+          this.passwordForm.markAsUntouched();
+          this.passwordForm.enable();
+        }
+      );
+  }
+}
