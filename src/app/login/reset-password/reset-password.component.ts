@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { UserHttpService } from 'src/app/shared/services/user-http.service';
 import { catchError, take } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -15,8 +15,13 @@ export class ResetPasswordComponent implements OnInit {
   disableSubmitBtn: boolean;
   requiredFieldMarker?: string;
   emptyFormMsg?: string;
+  token?: string;
 
-  constructor(private redirect: Router, private userService: UserHttpService) {
+  constructor(
+    private redirect: Router,
+    private userService: UserHttpService,
+    private route: ActivatedRoute
+  ) {
     this.disableSubmitBtn = false;
     this.passwordForm = new FormGroup({
       password: new FormControl(null, [
@@ -31,7 +36,9 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.token = this.route.snapshot.queryParams['tk'];
+  }
 
   get userInput(): any {
     return this.passwordForm.controls;
@@ -52,8 +59,7 @@ export class ResetPasswordComponent implements OnInit {
     // TODO: AWS SNS; token is hardcoded for endpoint test
     this.userService
       .resetPass({
-        token:
-          'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJndGE1QHNzLmNvbSJ9.IiFLLRCbYd6dmhOpf6nPpp0qyqn2N1v5htNwFdOuhFWD3_y3weXZCillqCwsnXcs9ciNfuG3NA5RXV46PM7uOQ',
+        token: this.token,
         password: this.userInput.password.value,
       })
       .pipe(
@@ -67,11 +73,8 @@ export class ResetPasswordComponent implements OnInit {
           this.redirect.navigate(['/home']);
         },
         (err: any) => {
-          if (err.status === 409) {
-            this.emptyFormMsg = err.error + '.';
-          } else {
-            // TODO: redirect to 404 not found
-          }
+          this.emptyFormMsg = err.error;
+          // TODO: redirect to 404 not found
           this.disableSubmitBtn = false;
           this.passwordForm.markAsUntouched();
           this.passwordForm.enable();
