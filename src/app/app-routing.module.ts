@@ -5,7 +5,7 @@ import { TransactionViewComponent } from './transaction/components/transaction-v
 import { ProfileComponent } from './user/profile/profile.component';
 import { UpdateProfileComponent } from './user/profile/update-profile/update-profile.component';
 import { ViewProfileComponent } from './user/profile/view-profile/view-profile.component';
-import { RegisterComponent } from './user/register/register.component';
+import { RegisterComponent } from './login/register/register.component';
 import { TransactionQueriesComponent } from './transaction/components/transaction-view/transaction-queries/transaction-queries.component';
 import { TransactionSearchComponent } from './transaction/components/transaction-view/transaction-queries/transaction-search/transaction-search.component';
 import { TransactionFilterComponent } from './transaction/components/transaction-view/transaction-queries/transaction-filter/transaction-filter.component';
