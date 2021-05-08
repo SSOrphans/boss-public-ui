@@ -15,6 +15,5 @@ export class NavbarComponent implements OnInit {
   onLogout(){
     this.navlink.isLoginViewable = true;
     this.navlink.isProfileViewable = false;
-    this.redirect.navigate(['home']);
   }
 }

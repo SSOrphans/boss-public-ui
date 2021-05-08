@@ -11,13 +11,16 @@ import { TransactionSearchComponent } from './transaction/components/transaction
 import { TransactionFilterComponent } from './transaction/components/transaction-view/transaction-queries/transaction-filter/transaction-filter.component';
 import { TransactionTableComponent } from './transaction/components/transaction-view/transaction-table/transaction-table.component';
 import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
 
   { path: 'login', component: LoginComponent },
 
-  { path: 'register', component: RegisterComponent },
+  { path: 'login/register', component: RegisterComponent },
+
+  { path: 'login/forgotpass', component: ForgotPasswordComponent },
 
   {
     path: 'profile',
