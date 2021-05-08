@@ -15,6 +15,10 @@ export class UserHttpService {
     return this.http.post(`${environment.apiUrl}/users`, user);
   }
 
+  forgotPass(email: object): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/user/email`, email);
+  }
+
   getUserProfileInfo(userID: number): Observable<ProfileInfo> {
     // TODO: login
     // user id is hardcoded to test endpoint
