@@ -17,7 +17,7 @@ describe('SearchOptions Model', () => {
 
   it('should initialize model values', () => {
     expect(model.transactions).toEqual([]);
-    expect(model.offset).toEqual( 1);
+    expect(model.page).toEqual( 1);
     expect(model.limit).toEqual( 5);
     expect(model.collectionSize).toEqual( 0);
     expect(model.sortBy).toEqual( 'date');

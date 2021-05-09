@@ -6,20 +6,18 @@ import {Injectable} from '@angular/core';
 
 export class SearchOptions {
   transactions: any = [];
-  offset = 1;
+  page = 1;
   limit = 5;
   collectionSize = 0;
   sortBy = 'date';
-  keyword?: string;
-  filter?: string;
+  keyword = '';
+  filter = '';
 
   getRecord(): Record<string, any> {
     return {
-      transactions: this.transactions,
-      page: this.offset,
+      offset: this.page - 1,
       limit: this.limit,
-      collectionSize: this.collectionSize,
-      sort: this.sortBy,
+      sortBy: this.sortBy,
       keyword: this.keyword,
       filter: this.filter
     };

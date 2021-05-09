@@ -45,11 +45,11 @@ export class TransactionTableComponent implements OnInit, OnChanges {
     this.options.keyword = '';
     if (changes.keywordToTableComponent && changes.keywordToTableComponent.currentValue) {
       this.options.keyword = changes.keywordToTableComponent.currentValue;
-      this.options.offset = 1;
+      this.options.page = 1;
     }
     if (changes.filterToTableComponent && changes.filterToTableComponent.currentValue) {
       this.options.filter = changes.filterToTableComponent.currentValue;
-      this.options.offset = 1;
+      this.options.page = 1;
     }
     this.loadTransactions();
   }
@@ -60,7 +60,7 @@ export class TransactionTableComponent implements OnInit, OnChanges {
 
   onSortChange(sortIndex: number): void {
     this.options.setSortBy(sortIndex);
-    this.options.offset = 1;
+    this.options.page = 1;
     this.loadTransactions();
   }
 

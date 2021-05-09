@@ -4,38 +4,38 @@
     <tr>
       <th class="transaction-table" (click)="onSortChange(0)">
         <div fxLayout="row" fxLayoutAlign="space-between center">Date
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='date'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='date'"></fa-icon>
         </div>
       </th>
       <th class="transaction-table" (click)="onSortChange(5)">
         <div fxLayout="row" fxLayoutAlign="space-between center">Type
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='type'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='type'"></fa-icon>
         </div>
       </th>
       <th class="transaction-table" (click)="onSortChange(1)">
         <div fxLayout="row" fxLayoutAlign="space-between center">Merchant Information
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='merchantName'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='merchantName'"></fa-icon>
         </div>
       </th>
       <th class="transaction-table" (click)="onSortChange(2)">
         <div fxLayout="row" fxLayoutAlign="space-between center">Amount
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='amount'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='amount'"></fa-icon>
         </div>
       </th>
       <th class="transaction-table" (click)="onSortChange(3)">
         <div fxLayout="row" fxLayoutAlign="space-between center">New Balance
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='newBalance'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='newBalance'"></fa-icon>
         </div>
       </th>
       <th class="transaction-table" (click)="onSortChange(4)">
         <div fxLayout="row" fxLayoutAlign="space-between center">Status
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='pending'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='pending'"></fa-icon>
         </div>
       </th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let transaction of transactions">
+    <tr *ngFor="let transaction of options.transactions">
       <td>{{transaction.date}}</td>
 
       <td ngSwitch="{{transaction.type}}" fxLayoutAlign="center">
@@ -59,9 +59,9 @@
 
   <ngb-pagination
 
-    [pageSize]="limit"
-    [collectionSize]="collectionSize"
-    [(page)]="page"
+    [pageSize]="options.limit"
+    [collectionSize]="options.collectionSize"
+    [(page)]="options.page"
     [maxSize]="5"
     [rotate]="true"
     [boundaryLinks]="true"
