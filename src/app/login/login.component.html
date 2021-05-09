@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <main>
+    <div class="col-10 col-sm-8 col-md-6 col-lg-4 mx-auto mt-5">
+      <div>
+        <h2>User Login</h2>
+      </div>
+      <div class="card col mx-auto mt-3">
+        <form class="ml-3 mr-3">
+          <div class="form-group mt-3">
+            <label>Username</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter a username"
+            />
+            <div class="text-danger"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Enter a password"
+            />
+            <div class="text-danger"></div>
+          </div>
+          <div class="row col form-group">
+            <button type="submit" class="btn btn-primary mr-3" (click)="onLogin()">Login</button>
+            <button class="btn mr-3" routerLink="/login/register">Register</button>
+            <button class="btn mr-3" routerLink="/login/forgotpassword">Forgot your password?</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
