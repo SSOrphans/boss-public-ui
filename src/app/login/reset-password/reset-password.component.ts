@@ -37,7 +37,14 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.token = this.route.snapshot.queryParams['tk'];
+    this.route.queryParams.subscribe((param)=>{
+      if(param['tk']){
+        this.token = param['tk'];
+      }
+      else{
+        this.redirect.navigate(['home']);
+      }
+    });
   }
 
   get userInput(): any {
