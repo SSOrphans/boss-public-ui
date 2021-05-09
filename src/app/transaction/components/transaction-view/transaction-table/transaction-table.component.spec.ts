@@ -7,16 +7,14 @@ import {CommonModule, DatePipe} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from '../../../../shared/services/http.service';
 import {ActivatedRoute} from '@angular/router';
-import {of} from 'rxjs';
-import {SearchOptions} from '../../../models/search-options.model';
 import {SimpleChange} from '@angular/core';
+import {of, throwError} from 'rxjs';
 
 describe('TransactionTableComponent', () => {
   let component: TransactionTableComponent;
   let fixture: ComponentFixture<TransactionTableComponent>;
   let httpService: HttpService;
   let datePipe: DatePipe;
-  let searchOptions: SearchOptions;
   let stubbedTransactions: any[];
 
   beforeEach(async () => {
@@ -41,16 +39,12 @@ describe('TransactionTableComponent', () => {
               }
             }
           },
-          {
-            provide: SearchOptions, useClass: SearchOptions
-          },
         ],
     })
       .compileComponents();
     fixture = TestBed.createComponent(TransactionTableComponent);
     httpService = TestBed.inject(HttpService);
     datePipe = TestBed.inject(DatePipe);
-    searchOptions = TestBed.inject(SearchOptions);
     component = fixture.componentInstance;
     fixture.detectChanges();
     stubbedTransactions = [{
@@ -88,18 +82,38 @@ describe('TransactionTableComponent', () => {
     spyOn(httpService, 'findAllTransactions').and.returnValue(of({transactions: stubbedTransactions}));
     component.loadTransactions();
     fixture.detectChanges();
-    expect(searchOptions.transactions).toBeDefined();
-    expect(searchOptions.transactions).toEqual(stubbedTransactions);
+    expect(component.options.transactions).toBeDefined();
+    expect(component.options.transactions).toEqual(stubbedTransactions);
   }));
 
   it('should change the value of keyword and filter', () => {
-    spyOn(httpService, 'findAllTransactions').and.returnValue(of(stubbedTransactions));
     const keywordToTableComponent = new SimpleChange(undefined, 'changeTest', false);
     const filterToTableComponent = new SimpleChange(undefined, 'changeTest', false);
     component.ngOnChanges({keywordToTableComponent, filterToTableComponent});
     fixture.detectChanges();
-    expect(searchOptions.keyword).toEqual('changeTest');
-    expect(searchOptions.filter).toEqual('changeTest');
-
+    expect(component.options.keyword).toEqual('changeTest');
+    expect(component.options.filter).toEqual('changeTest');
   });
+
+  it('should have changed sort value', () => {
+    component.onSortChange(1);
+    fixture.detectChanges();
+    expect(component.options.sortBy).toEqual('merchantName');
+  });
+
+  it('should load the transactions on page change', () => {
+    const loadTransactionSpy = spyOn(component, 'loadTransactions');
+    component.onPageChange();
+    fixture.detectChanges();
+    expect(loadTransactionSpy).toHaveBeenCalled();
+  });
+
+  it('should reinitialize page on httpService.findAllTransactions error', fakeAsync (() => {
+    spyOn(httpService, 'findAllTransactions').and.returnValue(throwError({status: 404}));
+    const initSpy = spyOn(component, 'ngOnInit');
+    component.loadTransactions();
+    tick();
+    fixture.detectChanges();
+    expect(initSpy).toHaveBeenCalled();
+  }));
 });

@@ -29,14 +29,16 @@ export class TransactionTableComponent implements OnInit, OnChanges {
   faCashRegister = faCashRegister;
   faDonate = faDonate;
 
+  options = new SearchOptions();
 
   @Input() keywordToTableComponent: string | undefined;
   @Input() filterToTableComponent: string | undefined;
 
-  constructor(private options: SearchOptions, private route: ActivatedRoute, private httpService: HttpService, private datePipe: DatePipe) {
+  constructor(private route: ActivatedRoute, private httpService: HttpService, private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
+    this.options = new SearchOptions();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
