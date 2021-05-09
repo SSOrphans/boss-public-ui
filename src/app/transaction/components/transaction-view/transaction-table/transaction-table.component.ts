@@ -10,7 +10,8 @@ import {
   faExchangeAlt,
   faMoneyBillWave,
   faMoneyCheckAlt,
-  faSortDown
+  faSortDown,
+  faSortUp
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -22,6 +23,7 @@ import {
 export class TransactionTableComponent implements OnInit, OnChanges {
 
   faSortDown = faSortDown;
+  faSortUp = faSortUp;
   faMoneyBillWave = faMoneyBillWave;
   faMoneyCheckAlt = faMoneyCheckAlt;
   faCreditCard = faCreditCard;
@@ -58,8 +60,8 @@ export class TransactionTableComponent implements OnInit, OnChanges {
     this.loadTransactions();
   }
 
-  onSortChange(sortIndex: number): void {
-    this.options.setSortBy(sortIndex);
+  onSortChange(sort: string): void {
+    this.options.setSortBy(sort);
     this.options.page = 1;
     this.loadTransactions();
   }
