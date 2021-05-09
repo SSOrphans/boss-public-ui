@@ -1,5 +1,4 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {SimpleChange} from '@angular/core';
 import {TransactionTableComponent} from './transaction-table.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from '../../../../app-routing.module';
@@ -9,13 +8,16 @@ import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from '../../../../shared/services/http.service';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
+import {SearchOptions} from '../../../models/search-options.model';
+import {SimpleChange} from '@angular/core';
 
 describe('TransactionTableComponent', () => {
   let component: TransactionTableComponent;
   let fixture: ComponentFixture<TransactionTableComponent>;
   let httpService: HttpService;
-  let stubbedTransactions: any[];
   let datePipe: DatePipe;
+  let searchOptions: SearchOptions;
+  let stubbedTransactions: any[];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,20 +29,28 @@ describe('TransactionTableComponent', () => {
         CommonModule,
         HttpClientModule
       ],
-      providers: [HttpService, DatePipe, DatePipe, {
-        provide: ActivatedRoute, useValue: {
-          snapshot: {
-            queryParams: {keyword: 'keywordFromParent-test', page: 0},
-            params: {id: 1}
-          }
-        }
-      }
-      ],
+      providers:
+        [
+          HttpService,
+          DatePipe,
+          {
+            provide: ActivatedRoute, useValue: {
+              snapshot: {
+                queryParams: {keyword: 'keywordFromParent-test', page: 0},
+                params: {id: 1}
+              }
+            }
+          },
+          {
+            provide: SearchOptions, useClass: SearchOptions
+          },
+        ],
     })
       .compileComponents();
     fixture = TestBed.createComponent(TransactionTableComponent);
     httpService = TestBed.inject(HttpService);
     datePipe = TestBed.inject(DatePipe);
+    searchOptions = TestBed.inject(SearchOptions);
     component = fixture.componentInstance;
     fixture.detectChanges();
     stubbedTransactions = [{
@@ -58,15 +68,16 @@ describe('TransactionTableComponent', () => {
   });
 
   it('should find transactions', () => {
-    spyOn(httpService, 'findAllTransactions').and.returnValue(stubbedTransactions);
-    const actualTransaction = httpService.findAllTransactions('');
+    let observableStubbedTransaction = of(stubbedTransactions);
+    spyOn(httpService, 'findAllTransactions').and.returnValue(observableStubbedTransaction);
+    const actualTransaction = httpService.findAllTransactions({id: '', httpQuery: ''});
     expect(httpService.findAllTransactions).toHaveBeenCalled();
-    expect(actualTransaction).toEqual(stubbedTransactions);
+    expect(actualTransaction).toEqual(observableStubbedTransaction);
   });
 
-  it('should call transaction subscribe', fakeAsync(() => {
+  it('should call transaction subscription', fakeAsync(() => {
     const findAllTransactionSpy = spyOn(httpService, 'findAllTransactions').and.returnValue(of(stubbedTransactions));
-    const subSpy = spyOn(httpService.findAllTransactions(''), 'subscribe');
+    const subSpy = spyOn(httpService.findAllTransactions({id: '', httpQuery: ''}), 'subscribe');
     component.loadTransactions();
     tick();
     expect(findAllTransactionSpy).toHaveBeenCalledBefore(subSpy);
@@ -74,28 +85,21 @@ describe('TransactionTableComponent', () => {
   }));
 
   it('should format the transaction', fakeAsync(() => {
-    spyOn(httpService, 'findAllTransactions').and.returnValue(of({ transactions: stubbedTransactions}));
+    spyOn(httpService, 'findAllTransactions').and.returnValue(of({transactions: stubbedTransactions}));
     component.loadTransactions();
     fixture.detectChanges();
-    expect(component.transactions).toBeDefined();
-    expect(component.transactions).toEqual(stubbedTransactions);
+    expect(searchOptions.transactions).toBeDefined();
+    expect(searchOptions.transactions).toEqual(stubbedTransactions);
   }));
 
-  it('should change the value of keyword', () => {
-    spyOn(httpService, 'findAllTransactions').and.returnValue(stubbedTransactions);
+  it('should change the value of keyword and filter', () => {
+    spyOn(httpService, 'findAllTransactions').and.returnValue(of(stubbedTransactions));
     const keywordToTableComponent = new SimpleChange(undefined, 'changeTest', false);
-    component.ngOnChanges({keywordToTableComponent});
-    fixture.detectChanges();
-    expect(component.keyword).toEqual('changeTest');
-
-  });
-
-  it('should change the value of keyword', () => {
-    spyOn(httpService, 'findAllTransactions').and.returnValue(stubbedTransactions);
     const filterToTableComponent = new SimpleChange(undefined, 'changeTest', false);
-    component.ngOnChanges({filterToTableComponent});
+    component.ngOnChanges({keywordToTableComponent, filterToTableComponent});
     fixture.detectChanges();
-    expect(component.filter).toEqual('changeTest');
+    expect(searchOptions.keyword).toEqual('changeTest');
+    expect(searchOptions.filter).toEqual('changeTest');
 
   });
 });
