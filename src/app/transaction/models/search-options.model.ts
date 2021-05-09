@@ -16,7 +16,6 @@ export class SearchOptions {
   getRecord(): Record<string, any> {
     return {
       offset: this.page - 1,
-      limit: this.limit,
       sortBy: this.sortBy,
       keyword: this.keyword,
       filter: this.filter

@@ -21,8 +21,8 @@ describe('SearchOptions Model', () => {
     expect(model.limit).toEqual( 5);
     expect(model.collectionSize).toEqual( 0);
     expect(model.sortBy).toEqual( 'date');
-    expect(model.keyword).toEqual( undefined);
-    expect(model.filter).toEqual( undefined);
+    expect(model.keyword).toEqual( '');
+    expect(model.filter).toEqual( '');
   });
 
   it('should change value of sortBy from setSortBy', () => {
@@ -41,5 +41,17 @@ describe('SearchOptions Model', () => {
     model.setSortBy(999);
     expect(model.sortBy).toEqual('date')
   });
+
+  it('should return a record of options', () => {
+    const aRecord = model.getRecord();
+    expect(aRecord).toEqual(
+      {
+        offset: 0,
+        sortBy: 'date',
+        keyword: '',
+        filter: ''
+      }
+    )
+  })
 
 });
