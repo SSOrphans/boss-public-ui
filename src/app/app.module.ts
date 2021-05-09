@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 
 import { HttpService } from './shared/services/http.service';
@@ -64,6 +64,7 @@ import { ResetPasswordComponent } from './login/reset-password/reset-password.co
     FontAwesomeModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    FormsModule,
   ],
   providers: [HttpService, DatePipe],
   bootstrap: [AppComponent],

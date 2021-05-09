@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-transaction-search',
@@ -17,9 +18,7 @@ export class TransactionSearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSearch(search: string): void {
-    this.searchEventFromSearchComponent.emit(search);
+  onSearch(search: NgForm): void {
+    this.searchEventFromSearchComponent.emit(search.value.search);
   }
-
-
 }

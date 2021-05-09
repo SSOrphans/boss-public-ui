@@ -1,8 +1,11 @@
-<div class="input-group mb-3">
-  <input class="form-control py-2" type="search" placeholder="Search Transactions..." id="example-search-input" #newSearch>
-  <span class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button" (click)="onSearch(newSearch.value)">
+<form #newSearch="ngForm" (ngSubmit)="onSearch(newSearch)" novalidate>
+  <div class="input-group mb-3">
+    <input ngModel class="form-control py-2" name="search" type="search" placeholder="Search Transactions..."
+           id="example-search-input"  (search)="onSearch(newSearch)">
+    <span class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit">
           <fa-icon [icon]="faSearch"></fa-icon>
       </button>
   </span>
-</div>
+  </div>
+</form>
