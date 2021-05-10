@@ -1,5 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-transaction-search',
@@ -10,6 +11,7 @@ export class TransactionSearchComponent implements OnInit {
   faSearch = faSearch;
 
   @Output() searchEventFromSearchComponent = new EventEmitter<string>();
+  @ViewChild("newSearch") search! : NgForm;
 
   constructor() {
   }
@@ -17,9 +19,7 @@ export class TransactionSearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSearch(search: string): void {
-    this.searchEventFromSearchComponent.emit(search);
+  onSearch(): void {
+    this.searchEventFromSearchComponent.emit(this.search.form.value.search);
   }
-
-
 }

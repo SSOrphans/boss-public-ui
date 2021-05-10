@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TransactionSearchComponent} from './transaction-search.component';
+import {NgForm} from '@angular/forms';
 
 describe('TransactionSearchComponent', () => {
   let component: TransactionSearchComponent;
@@ -8,7 +9,7 @@ describe('TransactionSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TransactionSearchComponent]
+      declarations: [TransactionSearchComponent, NgForm]
     })
       .compileComponents();
     fixture = TestBed.createComponent(TransactionSearchComponent);
@@ -23,9 +24,10 @@ describe('TransactionSearchComponent', () => {
 
   it('should emit new search to Query Component', () => {
     spyOn(component.searchEventFromSearchComponent, 'emit');
-    component.onSearch('test');
+    component.search.form.value.search = 'test'
+    component.onSearch();
     fixture.detectChanges();
-    expect(component.searchEventFromSearchComponent.emit).toHaveBeenCalledOnceWith('test');
+    expect(component.searchEventFromSearchComponent.emit).toHaveBeenCalledWith('test');
   });
 
 

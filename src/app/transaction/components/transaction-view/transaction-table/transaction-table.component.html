@@ -2,40 +2,56 @@
   <table class="table table-bordered">
     <thead>
     <tr>
-      <th class="transaction-table" (click)="onSortChange(0)">
+      <th class="transaction-table" (click)="onSortChange('date')">
         <div fxLayout="row" fxLayoutAlign="space-between center">Date
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='date'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='date'"
+                   *ngIf="options.sortDirection==='DESC'"></fa-icon>
+          <fa-icon [icon]="faSortUp" [hidden]="options.sortBy!='date'" *ngIf="options.sortDirection==='ASC'"></fa-icon>
         </div>
       </th>
-      <th class="transaction-table" (click)="onSortChange(5)">
+      <th class="transaction-table" (click)="onSortChange('type')">
         <div fxLayout="row" fxLayoutAlign="space-between center">Type
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='type'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='type'"
+                   *ngIf="options.sortDirection==='DESC'"></fa-icon>
+          <fa-icon [icon]="faSortUp" [hidden]="options.sortBy!='type'" *ngIf="options.sortDirection==='ASC'"></fa-icon>
         </div>
       </th>
-      <th class="transaction-table" (click)="onSortChange(1)">
+      <th class="transaction-table" (click)="onSortChange('merchantName')">
         <div fxLayout="row" fxLayoutAlign="space-between center">Merchant Information
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='merchantName'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='merchantName'"
+                   *ngIf="options.sortDirection==='DESC'"></fa-icon>
+          <fa-icon [icon]="faSortUp" [hidden]="options.sortBy!='merchantName'"
+                   *ngIf="options.sortDirection==='ASC'"></fa-icon>
         </div>
       </th>
-      <th class="transaction-table" (click)="onSortChange(2)">
+      <th class="transaction-table" (click)="onSortChange('amount')">
         <div fxLayout="row" fxLayoutAlign="space-between center">Amount
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='amount'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='amount'"
+                   *ngIf="options.sortDirection==='DESC'"></fa-icon>
+          <fa-icon [icon]="faSortUp" [hidden]="options.sortBy!='amount'"
+                   *ngIf="options.sortDirection==='ASC'"></fa-icon>
         </div>
       </th>
-      <th class="transaction-table" (click)="onSortChange(3)">
+      <th class="transaction-table" (click)="onSortChange('newBalance')">
         <div fxLayout="row" fxLayoutAlign="space-between center">New Balance
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='newBalance'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='newBalance'"
+                   *ngIf="options.sortDirection==='DESC'"></fa-icon>
+          <fa-icon [icon]="faSortUp" [hidden]="options.sortBy!='newBalance'"
+                   *ngIf="options.sortDirection==='ASC'"></fa-icon>
         </div>
       </th>
-      <th class="transaction-table" (click)="onSortChange(4)">
+      <th class="transaction-table" (click)="onSortChange('pending')">
         <div fxLayout="row" fxLayoutAlign="space-between center">Status
-          <fa-icon [icon]="faSortDown" [hidden]="sort!='pending'"></fa-icon>
+          <fa-icon [icon]="faSortDown" [hidden]="options.sortBy!='pending'"
+                   *ngIf="options.sortDirection==='DESC'"></fa-icon>
+          <fa-icon [icon]="faSortUp" [hidden]="options.sortBy!='pending'"
+                   *ngIf="options.sortDirection==='ASC'"></fa-icon>
         </div>
       </th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let transaction of transactions">
+    <tr *ngFor="let transaction of options.transactions">
       <td>{{transaction.date}}</td>
 
       <td ngSwitch="{{transaction.type}}" fxLayoutAlign="center">
@@ -59,9 +75,9 @@
 
   <ngb-pagination
 
-    [pageSize]="limit"
-    [collectionSize]="collectionSize"
-    [(page)]="page"
+    [pageSize]="options.limit"
+    [collectionSize]="options.collectionSize"
+    [(page)]="options.page"
     [maxSize]="5"
     [rotate]="true"
     [boundaryLinks]="true"

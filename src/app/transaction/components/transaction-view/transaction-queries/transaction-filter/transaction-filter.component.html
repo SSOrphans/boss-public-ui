@@ -4,6 +4,7 @@
       <fa-icon [icon]="faFilter"></fa-icon>
     </button>
     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button ngbDropdownItem (click)="onFilter('0')">No Filter</button>
       <button ngbDropdownItem (click)="onFilter('1')">Deposit</button>
       <button ngbDropdownItem (click)="onFilter('2')">Withdrawal</button>
       <button ngbDropdownItem (click)="onFilter('3')">Transfer</button>
