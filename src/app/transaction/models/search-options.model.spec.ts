@@ -26,20 +26,8 @@ describe('SearchOptions Model', () => {
   });
 
   it('should change value of sortBy from setSortBy', () => {
-    model.setSortBy(0);
-    expect(model.sortBy).toEqual('date')
-    model.setSortBy(1);
-    expect(model.sortBy).toEqual('merchantName')
-    model.setSortBy(2);
-    expect(model.sortBy).toEqual('amount')
-    model.setSortBy(3);
-    expect(model.sortBy).toEqual('newBalance')
-    model.setSortBy(4);
-    expect(model.sortBy).toEqual('pending')
-    model.setSortBy(5);
-    expect(model.sortBy).toEqual('type')
-    model.setSortBy(999);
-    expect(model.sortBy).toEqual('date')
+    model.setSortBy('testSort');
+    expect(model.sortBy).toEqual('testSort')
   });
 
   it('should return a record of options', () => {
