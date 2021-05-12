@@ -14,6 +14,7 @@ import {LoginComponent} from './login/login.component';
 import {ForgotPasswordComponent} from './login/forgot-password/forgot-password.component';
 import {ResetPasswordComponent} from './login/reset-password/reset-password.component';
 import {AccountsListComponent} from './account/components/accounts-list/accounts-list.component';
+import {AccountTransactionViewComponent} from './account-transaction/components/account-transaction-view/account-transaction-view.component';
 
 const routes: Routes = [
 
@@ -36,6 +37,7 @@ const routes: Routes = [
     ],
   },
   {path: 'users/:id/accounts', component: AccountsListComponent},
+  {path: 'accounts/:id', component: AccountTransactionViewComponent},
   {
     path: 'accounts/:id/transactions',
     component: TransactionViewComponent,

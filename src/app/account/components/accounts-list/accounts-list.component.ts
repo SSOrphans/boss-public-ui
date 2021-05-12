@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AccountHttpService} from '../../../shared/services/account-http.service';
 
 @Component({
@@ -11,10 +11,10 @@ export class AccountsListComponent implements OnInit {
 
   savingAccount: any[] = [];
   checkingAccount: any[] = [];
-  SAVINGACCOUNTS = 'ACCOUNT_SAVING';
-  CHECKINGACCOUNTS = 'ACCOUNT_CHECKING';
+  SAVING_ACCOUNTS = 'ACCOUNT_SAVING';
+  CHECKING_ACCOUNTS = 'ACCOUNT_CHECKING';
 
-  constructor(private route: ActivatedRoute, private http: AccountHttpService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: AccountHttpService) {
   }
 
   ngOnInit(): void {
@@ -22,7 +22,7 @@ export class AccountsListComponent implements OnInit {
   }
 
   onAccountSelect(id:number){
-    console.log(id);
+    this.router.navigate([`accounts/${id}`]).catch();
   }
 
   loadAccounts(): void {
@@ -31,9 +31,9 @@ export class AccountsListComponent implements OnInit {
       .subscribe(
         (resp: any) => {
           resp.accounts.forEach((account: any) => {
-            if (account.type == this.CHECKINGACCOUNTS) {
+            if (account.type == this.CHECKING_ACCOUNTS) {
               this.checkingAccount.push(account);
-            } else if (account.type == this.SAVINGACCOUNTS) {
+            } else if (account.type == this.SAVING_ACCOUNTS) {
               this.savingAccount.push(account);
             }
           });
