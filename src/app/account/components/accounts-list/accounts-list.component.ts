@@ -3,11 +3,11 @@ import {ActivatedRoute} from '@angular/router';
 import {AccountHttpService} from '../../../shared/services/account-http.service';
 
 @Component({
-  selector: 'app-accounts-view',
-  templateUrl: './accounts-view.component.html',
-  styleUrls: ['./accounts-view.component.css']
+  selector: 'app-accounts-list',
+  templateUrl: './accounts-list.component.html',
+  styleUrls: ['./accounts-list.component.css']
 })
-export class AccountsViewComponent implements OnInit {
+export class AccountsListComponent implements OnInit {
 
   savingAccount: any[] = [];
   checkingAccount: any[] = [];
