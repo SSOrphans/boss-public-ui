@@ -9,7 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 
-import { HttpService } from './shared/services/http.service';
+import { TransactionHttpService } from './shared/services/transaction-http.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -32,6 +32,8 @@ import { RegisterComponent } from './login/register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
+import {AccountsViewComponent} from './account/components/accounts-view/accounts-view.component';
+import { AccountTransactionViewComponent } from './account-transaction/components/account-transaction-view/account-transaction-view.component';
 
 
 @NgModule({
@@ -54,6 +56,9 @@ import { ResetPasswordComponent } from './login/reset-password/reset-password.co
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+
+    AccountsViewComponent,
+     AccountTransactionViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +71,7 @@ import { ResetPasswordComponent } from './login/reset-password/reset-password.co
     FlexLayoutModule,
     FormsModule,
   ],
-  providers: [HttpService, DatePipe],
+  providers: [TransactionHttpService, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

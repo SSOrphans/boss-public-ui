@@ -13,6 +13,7 @@ import {RegisterComponent} from './login/register/register.component';
 import {LoginComponent} from './login/login.component';
 import {ForgotPasswordComponent} from './login/forgot-password/forgot-password.component';
 import {ResetPasswordComponent} from './login/reset-password/reset-password.component';
+import {AccountsViewComponent} from './account/components/accounts-view/accounts-view.component';
 
 const routes: Routes = [
 
@@ -34,6 +35,7 @@ const routes: Routes = [
       {path: 'update', component: UpdateProfileComponent},
     ],
   },
+  {path: 'users/:id/accounts', component: AccountsViewComponent},
   {
     path: 'accounts/:id/transactions',
     component: TransactionViewComponent,

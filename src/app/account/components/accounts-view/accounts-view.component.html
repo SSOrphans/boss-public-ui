@@ -1,0 +1,26 @@
+<div>
+
+  <h2>Saving Accounts</h2>
+  <ul class="list-group" *ngFor="let account of savingAccount">
+    <li class="list-group-item mb-1 border-top d-flex justify-content-between account-item"
+        (click)="onAccountSelect(account.id)">
+      <span>{{account.name}} - {{account.id}}</span>
+      <span>${{account.balance.toFixed(2)}}</span></li>
+  </ul>
+  <ul class="list-group">
+    <li class="list-group-item mb-1 mt-1 list-group-item-primary border-top border-primary">Add a new Account</li>
+  </ul>
+
+  <h2 class="mt-5">Checking Accounts</h2>
+  <ul class="list-group" *ngFor="let account of checkingAccount">
+    <li class="list-group-item mb-1 border-top d-flex justify-content-between account-item"
+        (click)="onAccountSelect(account.id)">
+      <span>{{account.name}} - {{account.id}}</span>
+      <span>${{account.balance.toFixed(2)}}</span>
+    </li>
+  </ul>
+  <ul class="list-group">
+    <li class="list-group-item mb-1 mt-1 list-group-item-primary border-top border-primary">Add a new Account</li>
+  </ul>
+
+</div>

@@ -5,7 +5,7 @@ import {AppRoutingModule} from '../../../../app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule, DatePipe} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpService} from '../../../../shared/services/http.service';
+import {TransactionHttpService} from '../../../../shared/services/transaction-http.service';
 import {ActivatedRoute} from '@angular/router';
 import {SimpleChange} from '@angular/core';
 import {of, throwError} from 'rxjs';
@@ -13,7 +13,7 @@ import {of, throwError} from 'rxjs';
 describe('TransactionTableComponent', () => {
   let component: TransactionTableComponent;
   let fixture: ComponentFixture<TransactionTableComponent>;
-  let httpService: HttpService;
+  let httpService: TransactionHttpService;
   let datePipe: DatePipe;
   let stubbedTransactions: any[];
 
@@ -29,7 +29,7 @@ describe('TransactionTableComponent', () => {
       ],
       providers:
         [
-          HttpService,
+          TransactionHttpService,
           DatePipe,
           {
             provide: ActivatedRoute, useValue: {
@@ -43,7 +43,7 @@ describe('TransactionTableComponent', () => {
     })
       .compileComponents();
     fixture = TestBed.createComponent(TransactionTableComponent);
-    httpService = TestBed.inject(HttpService);
+    httpService = TestBed.inject(TransactionHttpService);
     datePipe = TestBed.inject(DatePipe);
     component = fixture.componentInstance;
     fixture.detectChanges();

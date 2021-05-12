@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {HttpService} from 'src/app/shared/services/http.service';
+import {TransactionHttpService} from 'src/app/shared/services/transaction-http.service';
 import {DatePipe} from '@angular/common';
 import {SearchOptions} from '../../../models/search-options.model';
 import {
@@ -39,7 +39,7 @@ export class TransactionTableComponent implements OnInit, OnChanges {
   @Input() keywordToTableComponent: string | undefined;
   @Input() filterToTableComponent: string | undefined;
 
-  constructor(private route: ActivatedRoute, private httpService: HttpService, private datePipe: DatePipe) {
+  constructor(private route: ActivatedRoute, private httpService: TransactionHttpService, private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
