@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-account-transaction-view',
@@ -8,17 +7,13 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AccountTransactionViewComponent implements OnInit {
 
-
-  constructor(private router: ActivatedRoute) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.loadAccount();
   }
 
   loadAccount(): void {
-    const id = this.router.snapshot.params.id;
-    console.log(id);
   }
 
 }

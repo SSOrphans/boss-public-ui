@@ -34,6 +34,7 @@ import {ForgotPasswordComponent} from './login/forgot-password/forgot-password.c
 import {ResetPasswordComponent} from './login/reset-password/reset-password.component';
 import {AccountsListComponent} from './account/components/accounts-list/accounts-list.component';
 import {AccountTransactionViewComponent} from './account-transaction/components/account-transaction-view/account-transaction-view.component';
+import { AccountsViewComponent } from './account/components/accounts-view/accounts-view.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import {AccountTransactionViewComponent} from './account-transaction/components/
 
     AccountsListComponent,
     AccountTransactionViewComponent,
+    AccountsViewComponent,
   ],
   imports: [
     BrowserModule,

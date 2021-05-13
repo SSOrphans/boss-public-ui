@@ -12,4 +12,8 @@ export class AccountHttpService {
   getAccounts(id: number): Observable<any> {
     return this.http.get(`/api/v1/accounts/users/${id}`);
   }
+
+  getAccount(accountId: number, userId: number): Observable<any> {
+    return this.http.get(`/api/v1/accounts/${accountId}/users/${userId}`);
+  }
 }

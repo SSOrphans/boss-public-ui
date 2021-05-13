@@ -1,5 +1,4 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 import {TransactionHttpService} from 'src/app/shared/services/transaction-http.service';
 import {DatePipe} from '@angular/common';
 import {SearchOptions} from '../../../models/search-options.model';
@@ -38,8 +37,9 @@ export class TransactionTableComponent implements OnInit, OnChanges {
 
   @Input() keywordToTableComponent: string | undefined;
   @Input() filterToTableComponent: string | undefined;
+  @Input() accountId: string | undefined;
 
-  constructor(private route: ActivatedRoute, private httpService: TransactionHttpService, private datePipe: DatePipe) {
+  constructor(private httpService: TransactionHttpService, private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -74,7 +74,7 @@ export class TransactionTableComponent implements OnInit, OnChanges {
   }
 
   loadTransactions(): void {
-    const id = this.route.snapshot.params.id;
+    const id = this.accountId || '0';
     const httpQuery = `?${new URLSearchParams(this.options.getRecord()).toString()}`;
     try {
       this.httpService.findAllTransactions({id, httpQuery})
