@@ -1,0 +1,7 @@
+.account-item{
+  cursor: pointer;
+}
+
+.account-item:hover{
+  background-color: lightgray;
+}

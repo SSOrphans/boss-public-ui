@@ -58,7 +58,7 @@
         <fa-icon *ngSwitchCase="'TRANSACTION_DEPOSIT'" [icon]="faDonate"></fa-icon>
         <fa-icon *ngSwitchCase="'TRANSACTION_WITHDRAW'" [icon]="faMoneyBillWave"></fa-icon>
         <fa-icon *ngSwitchCase="'TRANSACTION_TRANSFER'" [icon]="faExchangeAlt"></fa-icon>
-        <fa-icon *ngSwitchCase="'TRANSACTION_PAYMENT'" [icon]="faMoneyBillWave"></fa-icon>
+        <fa-icon *ngSwitchCase="'TRANSACTION_PAYMENT'" [icon]="faFileInvoiceDollar"></fa-icon>
         <fa-icon *ngSwitchCase="'TRANSACTION_CHECK'" [icon]="faMoneyCheckAlt"></fa-icon>
         <fa-icon *ngSwitchCase="'TRANSACTION_CHARGE'" [icon]="faCreditCard"></fa-icon>
         <fa-icon *ngSwitchDefault></fa-icon>
@@ -73,8 +73,11 @@
 
   </table>
 
-  <ngb-pagination
 
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between">
+
+  <ngb-pagination
     [pageSize]="options.limit"
     [collectionSize]="options.collectionSize"
     [(page)]="options.page"
@@ -82,8 +85,15 @@
     [rotate]="true"
     [boundaryLinks]="true"
     (pageChange)="onPageChange()"
+  ></ngb-pagination>
+
+  <select
+    [(ngModel)]="htmlSelect"
+    class="custom-select w-auto"
+    (change)="onLimitChange(htmlSelect)"
   >
-
-  </ngb-pagination>
+    <option [ngValue]="5">5 items per page</option>
+    <option [ngValue]="10">10 items per page</option>
+    <option [ngValue]="20">20 items per page</option>
+  </select>
 </div>
-

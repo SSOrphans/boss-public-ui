@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -10,11 +11,13 @@ export class TransactionViewComponent implements OnInit {
 
   keywordFromParent: string | undefined;
   filterFromParent: string | undefined;
+  accountId: string | undefined;
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.accountId = this.route.snapshot.params.id;
   }
 
   onSearch(newSearch: string): void {

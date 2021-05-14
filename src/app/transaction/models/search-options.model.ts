@@ -17,6 +17,7 @@ export class SearchOptions {
       sortBy: this.sortBy,
       keyword: this.keyword,
       filter: this.filter,
+      limit: this.limit,
       sortDirection: this.sortDirection
     };
   }

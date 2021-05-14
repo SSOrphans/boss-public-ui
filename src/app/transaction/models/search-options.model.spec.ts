@@ -37,7 +37,9 @@ describe('SearchOptions Model', () => {
         offset: 0,
         sortBy: 'date',
         keyword: '',
-        filter: ''
+        filter: '',
+        limit: 5,
+        sortDirection: 'DESC'
       }
     )
   })

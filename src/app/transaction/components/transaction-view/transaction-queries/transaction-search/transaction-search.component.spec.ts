@@ -24,7 +24,7 @@ describe('TransactionSearchComponent', () => {
 
   it('should emit new search to Query Component', () => {
     spyOn(component.searchEventFromSearchComponent, 'emit');
-    component.search.form.value.search = 'test'
+    component.keyword = 'test';
     component.onSearch();
     fixture.detectChanges();
     expect(component.searchEventFromSearchComponent.emit).toHaveBeenCalledWith('test');
