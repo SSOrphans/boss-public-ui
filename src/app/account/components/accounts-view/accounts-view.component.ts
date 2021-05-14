@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AccountHttpService} from '../../../shared/services/account-http.service';
 import {ActivatedRoute} from '@angular/router';
 
@@ -19,18 +19,23 @@ export class AccountsViewComponent implements OnInit {
     this.loadAccount();
   }
 
-  loadAccount(){
+  loadAccount() {
     // TODO: Fetch userId somewhere
     const accountId = this.router.snapshot.params.id;
     console.log(accountId);
-    this.http.getAccount(accountId, 1)
-      .subscribe(
-        ({name, balance, type}) => {
-          this.name = name;
-          this.balance = balance;
-          this.type = type.substr(8);
-        }
-      );
+    try {
+      this.http.getAccount(accountId, 1)
+        .subscribe(
+          ({name, balance, type}) => {
+            this.name = name;
+            this.balance = balance;
+            this.type = type.substr(8);
+          },
+          (error: any) => {
+          }
+        );
+    } catch (err) {
+    }
   }
 
 }

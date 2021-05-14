@@ -96,7 +96,7 @@ describe('TransactionTableComponent', () => {
   });
 
   it('should have changed sort value', () => {
-    component.onSortChange('1');
+    component.onSortChange('merchantName');
     fixture.detectChanges();
     expect(component.options.sortBy).toEqual('merchantName');
   });
@@ -114,6 +114,8 @@ describe('TransactionTableComponent', () => {
     component.loadTransactions();
     tick();
     fixture.detectChanges();
-    expect(initSpy).toHaveBeenCalled();
+    expect(component.options.page).toEqual(1);
+    expect(component.options.sortBy).toEqual('date');
+    expect(component.options.transactions).toEqual([]);
   }));
 });

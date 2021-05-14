@@ -23,7 +23,7 @@ describe('TransactionFilterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit new search', () => {
+  it('should emit new filter', () => {
     spyOn(component.filterEventFromFilterComponent, 'emit');
     component.onFilter('test');
     fixture.detectChanges();

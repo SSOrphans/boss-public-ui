@@ -11,34 +11,40 @@ export class AccountsListComponent implements OnInit {
 
   savingAccount: any[] = [];
   checkingAccount: any[] = [];
+  accounts: any[] = [];
   SAVING_ACCOUNTS = 'ACCOUNT_SAVING';
   CHECKING_ACCOUNTS = 'ACCOUNT_CHECKING';
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: AccountHttpService) {
+  constructor(private router: Router, private route: ActivatedRoute, private httpService: AccountHttpService) {
   }
 
   ngOnInit(): void {
     this.loadAccounts();
   }
 
-  onAccountSelect(id:number){
+  onAccountSelect(id: number) {
     this.router.navigate([`accounts/${id}`]).catch();
   }
 
   loadAccounts(): void {
     const id = this.route.snapshot.params.id;
-    this.http.getAccounts(id)
-      .subscribe(
-        (resp: any) => {
-          resp.accounts.forEach((account: any) => {
-            if (account.type == this.CHECKING_ACCOUNTS) {
-              this.checkingAccount.push(account);
-            } else if (account.type == this.SAVING_ACCOUNTS) {
-              this.savingAccount.push(account);
-            }
-          });
-        }
-      );
+    try {
+      this.httpService.getAccounts(id)
+        .subscribe(this.groupAccounts,
+          (error: any) => {}
+        );
+    } catch (err) {
+    }
   }
 
+  groupAccounts = (resp: any) => {
+    resp.accounts.forEach(
+      (account: any) => {
+        if (account.type == this.CHECKING_ACCOUNTS) {
+          this.checkingAccount.push(account);
+        } else if (account.type == this.SAVING_ACCOUNTS) {
+          this.savingAccount.push(account);
+        }
+      });
+  }
 }
