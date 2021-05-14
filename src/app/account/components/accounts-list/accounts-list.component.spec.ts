@@ -102,6 +102,6 @@ describe('AccountsListComponent', () => {
 
   it('should call router navigate', () => {
     component.onAccountSelect(1);
-    expect(routerSpy.navigate).toHaveBeenCalled();
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['accounts/1']);
   });
 });

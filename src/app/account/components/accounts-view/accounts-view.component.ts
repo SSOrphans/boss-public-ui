@@ -25,17 +25,18 @@ export class AccountsViewComponent implements OnInit {
     console.log(accountId);
     try {
       this.http.getAccount(accountId, 1)
-        .subscribe(
-          ({name, balance, type}) => {
-            this.name = name;
-            this.balance = balance;
-            this.type = type.substr(8);
-          },
+        .subscribe(this.setAccountAttributes,
           (error: any) => {
           }
         );
     } catch (err) {
     }
   }
+
+  setAccountAttributes = ({name, balance, type}: any) => {
+    this.name = name;
+    this.balance = balance;
+    this.type = type.substr(8);
+  };
 
 }

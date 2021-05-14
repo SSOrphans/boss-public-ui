@@ -23,7 +23,7 @@ export class AccountsListComponent implements OnInit {
   }
 
   onAccountSelect(id: number) {
-    this.router.navigate([`accounts/${id}`]).catch();
+    this.router.navigate([`accounts/${id}`]);
   }
 
   loadAccounts(): void {

@@ -118,4 +118,9 @@ describe('TransactionTableComponent', () => {
     expect(component.options.sortBy).toEqual('date');
     expect(component.options.transactions).toEqual([]);
   }));
+
+  it('should set the table limit', () => {
+    component.onLimitChange(10);
+    expect(component.options.limit).toEqual(10);
+  })
 });
