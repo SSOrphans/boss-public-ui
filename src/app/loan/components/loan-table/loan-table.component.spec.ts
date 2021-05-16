@@ -77,8 +77,8 @@ describe('LoanTableComponent', () => {
 
     component.onSortChange(sortBy);
 
-    expect(component.options.sortDirection).toEqual(sortBy);
-    expect(component.options.sortBy).toEqual(sortDirection);
+    expect(component.options.sortBy).toEqual(sortBy);
+    expect(component.options.sortDirection).toEqual(sortDirection);
     expect(component.initLoans).toHaveBeenCalled();
   });
 
