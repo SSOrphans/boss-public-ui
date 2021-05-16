@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccountHttpService} from '../../../shared/services/account-http.service';
 
@@ -7,7 +7,7 @@ import {AccountHttpService} from '../../../shared/services/account-http.service'
   templateUrl: './accounts-list.component.html',
   styleUrls: ['./accounts-list.component.css']
 })
-export class AccountsListComponent implements OnInit {
+export class AccountsListComponent implements OnInit, OnChanges {
 
   id: number = 0;
   savingAccount: any[] = [];
@@ -21,6 +21,10 @@ export class AccountsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params.id;
+    this.loadAccounts();
+  }
+
+  ngOnChanges() {
     this.loadAccounts();
   }
 
@@ -61,6 +65,9 @@ export class AccountsListComponent implements OnInit {
   };
 
   applyAccount = () => {
-    location.reload();
-  }
+    this.savingAccount = [];
+    this.checkingAccount = [];
+    this.ngOnChanges();
+  };
+
 }
