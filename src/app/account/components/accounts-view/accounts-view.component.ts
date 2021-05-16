@@ -8,6 +8,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./accounts-view.component.css']
 })
 export class AccountsViewComponent implements OnInit {
+  id: string | undefined;
   name: string | undefined;
   balance: string | undefined;
   type: string | undefined;
@@ -21,6 +22,7 @@ export class AccountsViewComponent implements OnInit {
 
   loadAccount() {
     // TODO: Fetch userId somewhere
+    this.id = this.router.snapshot.params.id;
     const accountId = this.router.snapshot.params.id;
     console.log(accountId);
     try {

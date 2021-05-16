@@ -26,6 +26,10 @@ export class AccountsListComponent implements OnInit {
     this.router.navigate([`accounts/${id}`]);
   }
 
+  onApplyAccount(){
+
+  }
+
   loadAccounts(): void {
     const id = this.route.snapshot.params.id;
     try {
