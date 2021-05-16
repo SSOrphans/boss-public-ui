@@ -2,7 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { sortInfo } from 'src/app/loan/models/sortInfo';
+import { LoanType } from 'src/app/loan/models/loanType';
+import { SearchOptions } from 'src/app/transaction/models/search-options.model';
 import { Loan } from '../../loan/models/loan';
 
 @Injectable({
@@ -11,14 +12,28 @@ import { Loan } from '../../loan/models/loan';
 export class LoanService {
   constructor(private http: HttpClient) {}
 
-  getUserLoans(userID: number, sortInfo: sortInfo): Observable<Loan[]> {
+  getUserLoans(
+    userID: number,
+    searchOptions: SearchOptions
+  ): Observable<Loan[]> {
     let url = new URL(`http://localhost:8080/api/users/${userID}/loans`);
-    url.searchParams.append('page', (sortInfo.page - 1)?.toString());
-    url.searchParams.append('limit', sortInfo.limit?.toString());
-    url.searchParams.append('sort', sortInfo.sort);
-    url.searchParams.append('sortDir', sortInfo.direction);
-    url.searchParams.append('keyword', sortInfo.keyword);
+    url.searchParams.append('page', (searchOptions.page - 1)?.toString());
+    url.searchParams.append('limit', searchOptions.limit?.toString());
+    url.searchParams.append('sort', searchOptions.sortBy);
+    url.searchParams.append(
+      'sortDir',
+      searchOptions.sortDirection.toLowerCase()
+    );
+    url.searchParams.append('keyword', searchOptions.keyword);
+    url.searchParams.append('filter', searchOptions.filter);
     return this.http.get<Loan[]>(url.href).pipe(catchError(this.handleError));
+  }
+
+  getAllLoanTypes(): Observable<LoanType[]> {
+    let url = new URL(`http://localhost:8080/api/loans/types`);
+    return this.http
+      .get<LoanType[]>(url.href)
+      .pipe(catchError(this.handleError));
   }
 
   postUserLoan(loan: Loan) {

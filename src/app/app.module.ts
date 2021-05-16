@@ -35,8 +35,8 @@ import { ResetPasswordComponent } from './login/reset-password/reset-password.co
 import { AccountsListComponent } from './account/components/accounts-list/accounts-list.component';
 import { AccountTransactionViewComponent } from './account-transaction/components/account-transaction-view/account-transaction-view.component';
 import { AccountsViewComponent } from './account/components/accounts-view/accounts-view.component';
-import { SortableHeaderDirective } from './loan/directives/sortable-header.directive';
-import { LoanTableComponent } from './loan/loan-table/loan-table.component';
+import { LoanTableComponent } from './loan/components/loan-table/loan-table.component';
+import { LoanViewComponent } from './loan/components/loan-view/loan-view.component';
 
 @NgModule({
   declarations: [
@@ -63,8 +63,8 @@ import { LoanTableComponent } from './loan/loan-table/loan-table.component';
     AccountTransactionViewComponent,
     AccountsViewComponent,
 
+    LoanViewComponent,
     LoanTableComponent,
-    SortableHeaderDirective,
   ],
   imports: [
     BrowserModule,

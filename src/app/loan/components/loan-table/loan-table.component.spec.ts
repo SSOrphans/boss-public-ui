@@ -4,7 +4,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
 import { LoanTableComponent } from './loan-table.component';
-import { SortEvent } from '../directives/sortable-header.directive';
 import { LoanService } from 'src/app/shared/services/loan-http.service';
 
 describe('LoanTableComponent', () => {
@@ -72,21 +71,23 @@ describe('LoanTableComponent', () => {
 
   it('should sort loans', () => {
     spyOn(component, 'initLoans');
-    let sortEvent: SortEvent = { column: 'id', direction: 'desc' };
 
-    component.onSort(sortEvent);
+    let sortBy = 'id';
+    let sortDirection = 'DESC';
 
-    expect(component.sortInfo.direction).toEqual(sortEvent.direction);
-    expect(component.sortInfo.sort).toEqual(sortEvent.column);
+    component.onSortChange(sortBy);
+
+    expect(component.options.sortDirection).toEqual(sortBy);
+    expect(component.options.sortBy).toEqual(sortDirection);
     expect(component.initLoans).toHaveBeenCalled();
   });
 
   it('should search loans', fakeAsync(() => {
     spyOn(component, 'initLoans');
     let searchValue = '1234';
-    component.filter.setValue(searchValue);
+    component.searchBar.setValue(searchValue);
 
-    expect(component.sortInfo.keyword).toEqual(searchValue);
+    expect(component.options.keyword).toEqual(searchValue);
     expect(component.initLoans).toHaveBeenCalled();
   }));
 });

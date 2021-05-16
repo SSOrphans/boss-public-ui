@@ -15,7 +15,7 @@ import { ForgotPasswordComponent } from './login/forgot-password/forgot-password
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 import { AccountsListComponent } from './account/components/accounts-list/accounts-list.component';
 import { AccountTransactionViewComponent } from './account-transaction/components/account-transaction-view/account-transaction-view.component';
-import { LoanTableComponent } from './loan/loan-table/loan-table.component';
+import { LoanViewComponent } from './loan/components/loan-view/loan-view.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -37,7 +37,7 @@ const routes: Routes = [
     ],
   },
   { path: 'users/:id/accounts', component: AccountsListComponent },
-  { path: 'users/:id/loans', component: LoanTableComponent },
+  { path: 'users/:id/loans', component: LoanViewComponent },
   { path: 'accounts/:id', component: AccountTransactionViewComponent },
   {
     path: 'accounts/:id/transactions',
