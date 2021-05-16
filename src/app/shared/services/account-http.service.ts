@@ -7,8 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class AccountHttpService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   getAccounts(id: number): Observable<any> {
     return this.http.get(`/api/v1/accounts/users/${id}`);
