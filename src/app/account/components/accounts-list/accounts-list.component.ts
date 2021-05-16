@@ -9,6 +9,7 @@ import {AccountHttpService} from '../../../shared/services/account-http.service'
 })
 export class AccountsListComponent implements OnInit {
 
+  id: number = 0;
   savingAccount: any[] = [];
   checkingAccount: any[] = [];
   accounts: any[] = [];
@@ -19,6 +20,7 @@ export class AccountsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.params.id;
     this.loadAccounts();
   }
 
@@ -26,16 +28,22 @@ export class AccountsListComponent implements OnInit {
     this.router.navigate([`accounts/${id}`]);
   }
 
-  onApplyAccount(){
-
+  onApplyAccount(type: number) {
+    try {
+      this.httpService.postAccount(type, this.id)
+        .subscribe(this.applyAccount, () => {
+        });
+    } catch (error: any) {
+    }
   }
 
   loadAccounts(): void {
-    const id = this.route.snapshot.params.id;
     try {
-      this.httpService.getAccounts(id)
-        .subscribe(this.groupAccounts,
-          (error: any) => {}
+      this.httpService.getAccounts(this.id)
+        .subscribe(
+          this.groupAccounts,
+          (error: any) => {
+          }
         );
     } catch (err) {
     }
@@ -50,5 +58,9 @@ export class AccountsListComponent implements OnInit {
           this.savingAccount.push(account);
         }
       });
+  };
+
+  applyAccount = () => {
+    location.reload();
   }
 }
