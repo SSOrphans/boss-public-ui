@@ -1,0 +1,70 @@
+<div class="container-fluid mt-2">
+  <form>
+    <div class="form-group form-inline">
+      <input
+        class="form-control"
+        placeholder="Enter loan number.."
+        type="text"
+        [formControl]="filter"
+      />
+      <button type="button" class="ml-auto" (click)="onBtnClicked()">
+        Create dummy data
+      </button>
+    </div>
+  </form>
+
+  <table class="table table-bordered table-striped table-responsive-lg">
+    <thead>
+      <tr>
+        <th scope="col" sortable="loanNumber" (sort)="onSort($event)">
+          Loan Number
+        </th>
+        <th scope="col" sortable="loanType" (sort)="onSort($event)">Type</th>
+        <th scope="col" sortable="amountDue" (sort)="onSort($event)">
+          Amount Due
+        </th>
+        <th scope="col" sortable="interestRate" (sort)="onSort($event)">
+          Interest Rate
+        </th>
+        <th scope="col" sortable="dueBy" (sort)="onSort($event)">Due By</th>
+        <th scope="col" sortable="takenAt" (sort)="onSort($event)">Taken At</th>
+        <th scope="col" sortable="amount" (sort)="onSort($event)">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let loan of loans">
+        <td scope="row">{{ loan.loanNumber }}</td>
+        <td>{{ loan.loanType }}</td>
+        <td>{{ loan.amountDue | currency }}</td>
+        <td>{{ loan.interestRate | percent: ".2" }}</td>
+        <td>{{ loan.dueBy | date: "shortDate" }}</td>
+        <td>{{ loan.takenAt | date: "short" }}</td>
+        <td>{{ loan.amount | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between">
+    <ngb-pagination
+      [collectionSize]="sortInfo.collectionSize"
+      [(page)]="sortInfo.page"
+      [pageSize]="sortInfo.limit"
+      (pageChange)="initLoans()"
+      [maxSize]="5"
+      [rotate]="true"
+      [ellipses]="false"
+      [boundaryLinks]="true"
+    >
+    </ngb-pagination>
+
+    <select
+      class="custom-select"
+      style="width: auto"
+      [(ngModel)]="sortInfo.limit"
+      (ngModelChange)="initLoans()"
+    >
+      <option [ngValue]="5">5 items per page</option>
+      <option [ngValue]="10">10 items per page</option>
+      <option [ngValue]="20">20 items per page</option>
+    </select>
+  </div>
+</div>

@@ -1,50 +1,51 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {TransactionViewComponent} from './transaction/components/transaction-view/transaction-view.component';
-import {ProfileComponent} from './user/profile/profile.component';
-import {UpdateProfileComponent} from './user/profile/update-profile/update-profile.component';
-import {ViewProfileComponent} from './user/profile/view-profile/view-profile.component';
-import {TransactionQueriesComponent} from './transaction/components/transaction-view/transaction-queries/transaction-queries.component';
-import {TransactionSearchComponent} from './transaction/components/transaction-view/transaction-queries/transaction-search/transaction-search.component';
-import {TransactionFilterComponent} from './transaction/components/transaction-view/transaction-queries/transaction-filter/transaction-filter.component';
-import {TransactionTableComponent} from './transaction/components/transaction-view/transaction-table/transaction-table.component';
-import {RegisterComponent} from './login/register/register.component';
-import {LoginComponent} from './login/login.component';
-import {ForgotPasswordComponent} from './login/forgot-password/forgot-password.component';
-import {ResetPasswordComponent} from './login/reset-password/reset-password.component';
-import {AccountsListComponent} from './account/components/accounts-list/accounts-list.component';
-import {AccountTransactionViewComponent} from './account-transaction/components/account-transaction-view/account-transaction-view.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { TransactionViewComponent } from './transaction/components/transaction-view/transaction-view.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { UpdateProfileComponent } from './user/profile/update-profile/update-profile.component';
+import { ViewProfileComponent } from './user/profile/view-profile/view-profile.component';
+import { TransactionQueriesComponent } from './transaction/components/transaction-view/transaction-queries/transaction-queries.component';
+import { TransactionSearchComponent } from './transaction/components/transaction-view/transaction-queries/transaction-search/transaction-search.component';
+import { TransactionFilterComponent } from './transaction/components/transaction-view/transaction-queries/transaction-filter/transaction-filter.component';
+import { TransactionTableComponent } from './transaction/components/transaction-view/transaction-table/transaction-table.component';
+import { RegisterComponent } from './login/register/register.component';
+import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
+import { AccountsListComponent } from './account/components/accounts-list/accounts-list.component';
+import { AccountTransactionViewComponent } from './account-transaction/components/account-transaction-view/account-transaction-view.component';
+import { LoanTableComponent } from './loan/loan-table/loan-table.component';
 
 const routes: Routes = [
+  { path: 'home', component: HomeComponent },
 
-  {path: 'home', component: HomeComponent},
+  { path: 'login', component: LoginComponent },
 
-  {path: 'login', component: LoginComponent},
+  { path: 'login/register', component: RegisterComponent },
 
-  {path: 'login/register', component: RegisterComponent},
+  { path: 'login/forgotpassword', component: ForgotPasswordComponent },
 
-  {path: 'login/forgotpassword', component: ForgotPasswordComponent},
-
-  {path: 'login/resetpassword', component: ResetPasswordComponent},
+  { path: 'login/resetpassword', component: ResetPasswordComponent },
 
   {
     path: 'profile',
     component: ProfileComponent,
     children: [
-      {path: '', component: ViewProfileComponent},
-      {path: 'update', component: UpdateProfileComponent},
+      { path: '', component: ViewProfileComponent },
+      { path: 'update', component: UpdateProfileComponent },
     ],
   },
-  {path: 'users/:id/accounts', component: AccountsListComponent},
-  {path: 'accounts/:id', component: AccountTransactionViewComponent},
+  { path: 'users/:id/accounts', component: AccountsListComponent },
+  { path: 'users/:id/loans', component: LoanTableComponent },
+  { path: 'accounts/:id', component: AccountTransactionViewComponent },
   {
     path: 'accounts/:id/transactions',
     component: TransactionViewComponent,
     children: [
       {
         path: '',
-        component: TransactionTableComponent
+        component: TransactionTableComponent,
       },
       {
         path: '',
@@ -56,19 +57,17 @@ const routes: Routes = [
           },
           {
             path: '',
-            component: TransactionFilterComponent
-          }
-        ]
-      }
-    ]
+            component: TransactionFilterComponent,
+          },
+        ],
+      },
+    ],
   },
-  {path: '**', redirectTo: 'home'},
-
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
