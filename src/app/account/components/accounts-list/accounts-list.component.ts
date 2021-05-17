@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccountHttpService} from '../../../shared/services/account-http.service';
 
@@ -7,8 +7,9 @@ import {AccountHttpService} from '../../../shared/services/account-http.service'
   templateUrl: './accounts-list.component.html',
   styleUrls: ['./accounts-list.component.css']
 })
-export class AccountsListComponent implements OnInit {
+export class AccountsListComponent implements OnInit, OnChanges {
 
+  id: number = 0;
   savingAccount: any[] = [];
   checkingAccount: any[] = [];
   accounts: any[] = [];
@@ -19,6 +20,11 @@ export class AccountsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.params.id;
+    this.loadAccounts();
+  }
+
+  ngOnChanges() {
     this.loadAccounts();
   }
 
@@ -26,12 +32,22 @@ export class AccountsListComponent implements OnInit {
     this.router.navigate([`accounts/${id}`]);
   }
 
-  loadAccounts(): void {
-    const id = this.route.snapshot.params.id;
+  onApplyAccount(type: number) {
     try {
-      this.httpService.getAccounts(id)
-        .subscribe(this.groupAccounts,
-          (error: any) => {}
+      this.httpService.postAccount(type, this.id)
+        .subscribe(this.applyAccount, () => {
+        });
+    } catch (error: any) {
+    }
+  }
+
+  loadAccounts(): void {
+    try {
+      this.httpService.getAccounts(this.id)
+        .subscribe(
+          this.groupAccounts,
+          (error: any) => {
+          }
         );
     } catch (err) {
     }
@@ -46,5 +62,12 @@ export class AccountsListComponent implements OnInit {
           this.savingAccount.push(account);
         }
       });
-  }
+  };
+
+  applyAccount = () => {
+    this.savingAccount = [];
+    this.checkingAccount = [];
+    this.ngOnChanges();
+  };
+
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
@@ -15,5 +15,15 @@ export class AccountHttpService {
 
   getAccount(accountId: number, userId: number): Observable<any> {
     return this.http.get(`/api/v1/accounts/${accountId}/users/${userId}`);
+  }
+
+  postAccount(accountType: number, userId: number): Observable<any> {
+
+    return this.http.post(
+      `/api/v1/accounts`,
+      {
+        "account_type": accountType,
+        "user_id": userId,
+      });
   }
 }

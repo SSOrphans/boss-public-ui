@@ -104,4 +104,30 @@ describe('AccountsListComponent', () => {
     component.onAccountSelect(1);
     expect(routerSpy.navigate).toHaveBeenCalledWith(['accounts/1']);
   });
+
+  it('should call ngOnChanges', () => {
+    const onChangeSpy = spyOn(component, 'ngOnChanges');
+    component.applyAccount();
+    fixture.detectChanges();
+    expect(component.savingAccount).toEqual([]);
+    expect(component.checkingAccount).toEqual([]);
+    expect(onChangeSpy).toHaveBeenCalled();
+  });
+
+  it('should reload the account list', () => {
+    const loadSpy = spyOn(component, 'loadAccounts');
+    component.ngOnChanges();
+    expect(loadSpy).toHaveBeenCalled();
+  });
+
+  it('should call an http post method on Apply', fakeAsync(() => {
+    const getAccountsSpy = spyOn(httpService, 'postAccount').and.returnValue(of({}));
+    const subSpy = spyOn(httpService.postAccount(1, 1), 'subscribe');
+    component.onApplyAccount(1);
+    tick();
+    expect(getAccountsSpy).toHaveBeenCalledBefore(subSpy);
+    expect(subSpy).toHaveBeenCalled();
+  }));
+
+
 });
