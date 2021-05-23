@@ -1,0 +1,174 @@
+<div class="container-fluid mt-2">
+  <form>
+    <div class="form-group form-inline justify-content-between">
+      <input
+        class="form-control"
+        placeholder="Enter loan number.."
+        type="text"
+        [formControl]="searchBar"
+      />
+      <div ngbDropdown placement="bottom-right">
+        <button class="btn" ngbDropdownToggle>
+          {{ this.selectedFilter }}
+          <fa-icon [icon]="faFilter"></fa-icon>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button
+            ngbDropdownItem
+            *ngFor="let loanType of loanTypes"
+            (click)="onFilter($event)"
+          >
+            {{ this.formatLoanType(loanType.name) }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-bordered table-striped table-responsive-lg">
+    <thead>
+      <tr>
+        <th class="transaction-table" (click)="onSortChange('loanNumber')">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            Loan Number
+            <fa-icon
+              [icon]="faSortDown"
+              [hidden]="options.sortBy != 'loanNumber'"
+              *ngIf="options.sortDirection === 'DESC'"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faSortUp"
+              [hidden]="options.sortBy != 'loanNumber'"
+              *ngIf="options.sortDirection === 'ASC'"
+            ></fa-icon>
+          </div>
+        </th>
+        <th class="transaction-table" (click)="onSortChange('loanType')">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            Loan Type
+            <fa-icon
+              [icon]="faSortDown"
+              [hidden]="options.sortBy != 'loanType'"
+              *ngIf="options.sortDirection === 'DESC'"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faSortUp"
+              [hidden]="options.sortBy != 'loanType'"
+              *ngIf="options.sortDirection === 'ASC'"
+            ></fa-icon>
+          </div>
+        </th>
+        <th class="transaction-table" (click)="onSortChange('amountDue')">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            Amount due
+            <fa-icon
+              [icon]="faSortDown"
+              [hidden]="options.sortBy != 'amountDue'"
+              *ngIf="options.sortDirection === 'DESC'"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faSortUp"
+              [hidden]="options.sortBy != 'amountDue'"
+              *ngIf="options.sortDirection === 'ASC'"
+            ></fa-icon>
+          </div>
+        </th>
+        <th class="transaction-table" (click)="onSortChange('interestRate')">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            Interest Rate
+            <fa-icon
+              [icon]="faSortDown"
+              [hidden]="options.sortBy != 'interestRate'"
+              *ngIf="options.sortDirection === 'DESC'"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faSortUp"
+              [hidden]="options.sortBy != 'interestRate'"
+              *ngIf="options.sortDirection === 'ASC'"
+            ></fa-icon>
+          </div>
+        </th>
+        <th class="transaction-table" (click)="onSortChange('dueBy')">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            Due date
+            <fa-icon
+              [icon]="faSortDown"
+              [hidden]="options.sortBy != 'dueBy'"
+              *ngIf="options.sortDirection === 'DESC'"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faSortUp"
+              [hidden]="options.sortBy != 'dueBy'"
+              *ngIf="options.sortDirection === 'ASC'"
+            ></fa-icon>
+          </div>
+        </th>
+        <th class="transaction-table" (click)="onSortChange('takenAt')">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            Take at
+            <fa-icon
+              [icon]="faSortDown"
+              [hidden]="options.sortBy != 'takenAt'"
+              *ngIf="options.sortDirection === 'DESC'"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faSortUp"
+              [hidden]="options.sortBy != 'takenAt'"
+              *ngIf="options.sortDirection === 'ASC'"
+            ></fa-icon>
+          </div>
+        </th>
+        <th class="transaction-table" (click)="onSortChange('amount')">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            Total
+            <fa-icon
+              [icon]="faSortDown"
+              [hidden]="options.sortBy != 'amount'"
+              *ngIf="options.sortDirection === 'DESC'"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faSortUp"
+              [hidden]="options.sortBy != 'amount'"
+              *ngIf="options.sortDirection === 'ASC'"
+            ></fa-icon>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let loan of loans">
+        <td scope="row">{{ loan.loanNumber }}</td>
+        <td>{{ loan.loanType }}</td>
+        <td>{{ loan.amountDue | currency }}</td>
+        <td>{{ loan.interestRate | percent: ".2" }}</td>
+        <td>{{ loan.dueBy | date: "shortDate" }}</td>
+        <td>{{ loan.takenAt | date: "short" }}</td>
+        <td>{{ loan.amount | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between">
+    <ngb-pagination
+      [collectionSize]="options.collectionSize"
+      [(page)]="options.page"
+      [pageSize]="options.limit"
+      (pageChange)="initLoans()"
+      [maxSize]="5"
+      [rotate]="true"
+      [ellipses]="false"
+      [boundaryLinks]="true"
+    >
+    </ngb-pagination>
+
+    <select
+      class="custom-select"
+      style="width: auto"
+      [(ngModel)]="options.limit"
+      (ngModelChange)="onLimitSelect()"
+    >
+      <option [ngValue]="5">5 items per page</option>
+      <option [ngValue]="10">10 items per page</option>
+      <option [ngValue]="20">20 items per page</option>
+    </select>
+  </div>
+</div>
