@@ -1,9 +1,17 @@
 node {
     try {
-        nodejs('NodeJS'){
-                    sh 'npm --version'
-                    sh 'ng --version'
-                }
+        withEnv(['serviceName=boss-public-ui', "commitHash=${sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()}"]) {
+            stage('Checkout') {
+                echo "Checking out $serviceName"
+                checkout scm
+            }
+            stage('Build') {
+                nodejs('NodeJS'){
+                            sh 'npm install'
+                            sh 'ng build --base-href ./'
+                        }
+            }
+        }
     }
     catch (exc) {
         echo "$exc"
