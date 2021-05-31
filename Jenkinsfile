@@ -6,10 +6,11 @@ node {
                 checkout scm
             }
             stage('Build') {
-                nodejs('NodeJS'){
-                            sh 'npm install'
-                            sh 'ng build --base-href ./'
-                        }
+                nodejs('NodeJS') {
+                    dir('*@script')
+                    sh 'npm install'
+                    sh 'ng build --base-href ./'
+                }
             }
         }
     }
