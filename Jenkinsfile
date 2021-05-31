@@ -7,9 +7,10 @@ node {
             }
             stage('Build') {
                 nodejs('NodeJS') {
-                    dir('*@script')
-                    sh 'npm install'
-                    sh 'ng build --base-href ./'
+                    dir('*@script') {
+                        sh 'npm install'
+                        sh 'ng build --base-href ./'
+                    }
                 }
             }
         }
