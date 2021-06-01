@@ -15,7 +15,7 @@ node {
             stage('Push to S3') {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-cli', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     echo "Pushing to s3"
-                    sh 'aws s3 cp --recursive dist s3://ssor-test-ui/'
+                    sh 'aws s3 cp --recursive dist/$serviceName s3://ssor-test-ui/'
                 }
             }
         }
@@ -25,6 +25,7 @@ node {
     } finally {
         stage('Cleanup') {
             echo "cleanup"
+            sh 'rm -rf *'
         }
     }
 }
