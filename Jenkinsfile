@@ -13,7 +13,7 @@ node {
                 }
             }
             stage('Push to S3') {
-                withAWS(region: 'us-west-1', credentials: 'aws-cli') {
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-cli', user: 'AWS_ACCESS_KEY_ID', pass: 'AWS_SECRET_ACCESS_KEY']]) {
                     echo "Pushing to s3"
                     sh 'aws s3 cp --recursive dist s3://ssor-test-ui/'
                 }
