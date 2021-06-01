@@ -12,8 +12,10 @@ node {
                     sh 'ng build --base-href ./'
                 }
             }
-            stage('Deploy') {
+            stage('Push to S3') {
                 withAWS(region: 'us-west-1', credentials: 'aws_credentials') {
+                    echo "Pushing to s3"
+                    sh 'aws s3 ls'
                     sh 'aws s3 cp --recursive dist s3://ssor-test-ui/'
                 }
             }
