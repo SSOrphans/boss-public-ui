@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TransactionViewComponent} from './transaction-view.component';
+import {ActivatedRoute} from '@angular/router';
 
 describe('TransactionViewComponent', () => {
   let component: TransactionViewComponent;
@@ -8,7 +9,18 @@ describe('TransactionViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TransactionViewComponent]
+      declarations: [TransactionViewComponent],
+      providers:
+      [
+        {
+          provide: ActivatedRoute, useValue: {
+            snapshot: {
+              queryParams: {keyword: 'keywordFromParent-test', page: 0},
+              params: {id: 1}
+            }
+          }
+        },
+      ]
     })
       .compileComponents();
     fixture = TestBed.createComponent(TransactionViewComponent);

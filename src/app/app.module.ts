@@ -6,10 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 
-import { HttpService } from './shared/services/http.service';
+import { TransactionHttpService } from './shared/services/transaction-http.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -32,7 +32,11 @@ import { RegisterComponent } from './login/register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
-
+import { AccountsListComponent } from './account/components/accounts-list/accounts-list.component';
+import { AccountTransactionViewComponent } from './account-transaction/components/account-transaction-view/account-transaction-view.component';
+import { AccountsViewComponent } from './account/components/accounts-view/accounts-view.component';
+import { LoanTableComponent } from './loan/components/loan-table/loan-table.component';
+import { LoanViewComponent } from './loan/components/loan-view/loan-view.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,13 @@ import { ResetPasswordComponent } from './login/reset-password/reset-password.co
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+
+    AccountsListComponent,
+    AccountTransactionViewComponent,
+    AccountsViewComponent,
+
+    LoanViewComponent,
+    LoanTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +77,7 @@ import { ResetPasswordComponent } from './login/reset-password/reset-password.co
     FlexLayoutModule,
     FormsModule,
   ],
-  providers: [HttpService, DatePipe],
+  providers: [TransactionHttpService, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

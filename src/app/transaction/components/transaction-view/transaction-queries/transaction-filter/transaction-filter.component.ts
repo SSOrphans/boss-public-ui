@@ -8,7 +8,7 @@ import {faFilter} from '@fortawesome/free-solid-svg-icons';
 })
 export class TransactionFilterComponent implements OnInit {
   faFilter = faFilter;
-
+  selectedFilter = 'No Filter';
   @Output() filterEventFromFilterComponent = new EventEmitter<string>();
 
   constructor() {
@@ -19,5 +19,19 @@ export class TransactionFilterComponent implements OnInit {
 
   onFilter(filter: string): void {
     this.filterEventFromFilterComponent.emit(filter);
+    this.selectedFilter = this.getFilter(+filter);
+  }
+
+  getFilter(filterIndex: number): string {
+    switch(filterIndex){
+      case 1: return 'Deposit';
+      case 2: return 'Withdrawal';
+      case 3: return 'Transfer';
+      case 4: return 'Payment';
+      case 5: return 'Check';
+      case 6: return 'Charge';
+      case 7: return 'ATM';
+      default: return 'No Filter'
+    }
   }
 }

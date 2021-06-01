@@ -1,0 +1,15 @@
+.account-item, .account-create{
+  cursor: pointer;
+}
+
+.account-item:hover{
+  background-color: lightgray;
+}
+
+.pending {
+  background-color: darkgray;
+}
+
+.pending:hover {
+  background-color: gray;
+}
