@@ -12,6 +12,11 @@ node {
                     sh 'ng build --base-href ./'
                 }
             }
+            stage('Deploy') {
+                withAWS(region: 'us-west-1', credentials: 'aws_credentials') {
+                    sh 'aws s3 cp --recursive dist s3://ssor-test-ui/'
+                }
+            }
         }
     }
     catch (exc) {
