@@ -13,7 +13,7 @@ node {
                 }
             }
             stage('Push to S3') {
-                withAwsCli(credentialsId: 'jenkins-user', defaultRegion: 'us-west-1') {
+                withAWS(region: 'us-west-1', credentials: 'aws-cli') {
                     echo "Pushing to s3"
                     sh 'aws s3 cp --recursive dist s3://ssor-test-ui/'
                 }
