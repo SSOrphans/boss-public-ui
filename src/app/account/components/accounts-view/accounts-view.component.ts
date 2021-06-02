@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AccountHttpService} from '../../../shared/services/account-http.service';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-accounts-view',
   templateUrl: './accounts-view.component.html',
-  styleUrls: ['./accounts-view.component.css']
+  styleUrls: ['./accounts-view.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AccountsViewComponent implements OnInit {
   id: string | undefined;
