@@ -33,10 +33,9 @@ const routes: Routes = [
     component: ProfileComponent,
     children: [
       { path: '', component: ViewProfileComponent },
-      // { path: 'update', component: UpdateProfileComponent },
+      { path: 'update', component: UpdateProfileComponent },
     ],
   },
-  { path: 'profile/update', component: UpdateProfileComponent },
   { path: 'users/:id/accounts', component: AccountsListComponent },
   { path: 'users/:id/loans', component: LoanViewComponent },
   { path: 'accounts/:id', component: AccountTransactionViewComponent },
