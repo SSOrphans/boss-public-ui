@@ -16,22 +16,22 @@ export class UserHttpService {
   }
 
   forgotPass(email: object): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/api/v1//user/email`, email);
+    return this.http.post(`${environment.apiUrl}/api/v1/user/email`, email);
   }
 
   resetPass(jwt: object): Observable<any>{
-    return this.http.put(`${environment.apiUrl}/api/v1//user/password`, jwt)
+    return this.http.put(`${environment.apiUrl}/api/v1/user/password`, jwt)
   }
 
   getUserProfileInfo(userID: number): Observable<ProfileInfo> {
     // TODO: login
     // user id is hardcoded to test endpoint
-    return this.http.get(`${environment.apiUrl}/api/v1//users/${userID}`);
+    return this.http.get(`${environment.apiUrl}/api/v1/users/${userID}`);
   }
 
   updateProfile(userID: number, user: object): Observable<any> {
     // TODO: login
     // user id is hardcoded to test endpoint
-    return this.http.put(`${environment.apiUrl}/api/v1//users/${userID}`, user);
+    return this.http.put(`${environment.apiUrl}/api/v1/users/${userID}`, user);
   }
 }
