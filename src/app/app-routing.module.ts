@@ -33,7 +33,7 @@ const routes: Routes = [
     component: ProfileComponent,
     children: [
       { path: '', component: ViewProfileComponent },
-      { path: 'update', component: UpdateProfileComponent },
+      // { path: 'update', component: UpdateProfileComponent },
     ],
   },
   { path: 'profile/update', component: UpdateProfileComponent },
