@@ -11,11 +11,11 @@ export class AccountHttpService {
   constructor(private http: HttpClient) { }
 
   getAccounts(id: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/accounts/users/${id}`);
+    return this.http.get(`${environment.apiUrl}/api/v1/accounts/users/${id}`);
   }
 
   getAccount(accountId: number, userId: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/accounts/${accountId}/users/${userId}`);
+    return this.http.get(`${environment.apiUrl}/api/v1/accounts/${accountId}/users/${userId}`);
   }
 
   postAccount(accountType: number, userId: number): Observable<any> {

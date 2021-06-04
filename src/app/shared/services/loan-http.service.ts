@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { LoanType } from 'src/app/loan/models/loanType';
 import { SearchOptions } from 'src/app/transaction/models/search-options.model';
 import { Loan } from '../../loan/models/loan';
+import {environment} from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class LoanService {
     userID: number,
     searchOptions: SearchOptions
   ): Observable<Loan[]> {
-    let url = new URL(`http://localhost:8080/api/users/${userID}/loans`);
+    let url = new URL(`${environment.apiUrl}/api/users/${userID}/loans`);
     url.searchParams.append('page', (searchOptions.page - 1)?.toString());
     url.searchParams.append('limit', searchOptions.limit?.toString());
     url.searchParams.append('sort', searchOptions.sortBy);
@@ -30,14 +31,14 @@ export class LoanService {
   }
 
   getAllLoanTypes(): Observable<LoanType[]> {
-    let url = new URL(`http://localhost:8080/api/loans/types`);
+    let url = new URL(`${environment.apiUrl}/api/loans/types`);
     return this.http
       .get<LoanType[]>(url.href)
       .pipe(catchError(this.handleError));
   }
 
   postUserLoan(loan: Loan) {
-    let url = new URL(`http://localhost:8080/api/loans`);
+    let url = new URL(`${environment.apiUrl}/api/loans`);
     return this.http.post(url.href, loan).pipe(catchError(this.handleError));
   }
 
