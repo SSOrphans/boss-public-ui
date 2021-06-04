@@ -2,7 +2,7 @@ node {
     try {
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-cli', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                 withEnv(["AWS_ELB_DNS=${sh(script: 'aws elbv2 --region us-east-2 describe-load-balancers --query LoadBalancers[*].DNSName --output text', returnStdout: true).trim()}",
-                        'serviceName=boss-public']) {
+                        'serviceName=boss-public-ui']) {
 
                 stage('Checkout') {
                     echo "Checking out $serviceName"
@@ -20,7 +20,7 @@ node {
 
                 stage('Push to S3') {
                     echo "Pushing to s3"
-                    sh 'aws s3 cp --recursive dist/$serviceName-ui s3://$serviceName/'
+                    sh 'aws s3 cp --recursive dist/$serviceName s3://$serviceName/'
                 }
             }
         }
