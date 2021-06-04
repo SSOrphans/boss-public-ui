@@ -11,8 +11,12 @@ export class UserHttpService {
   constructor(private http: HttpClient) {
   }
 
+  loginUser(loginDetails: object): Observable<any> {
+    return this.http.post("http://localhost:8080/login", loginDetails);
+  }
+
   registerUser(user: object): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/users`, user);
+    return this.http.post(`${environment.apiUrl}/users/registration`, user);
   }
 
   forgotPass(email: object): Observable<any> {
