@@ -21,7 +21,7 @@ export class AccountHttpService {
   postAccount(accountType: number, userId: number): Observable<any> {
 
     return this.http.post(
-      `/api/v1/accounts`,
+      `${environment.apiUrl}/api/v1/accounts`,
       {
         "account_type": accountType,
         "user_id": userId,
