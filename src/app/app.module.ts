@@ -37,6 +37,8 @@ import { AccountTransactionViewComponent } from './account-transaction/component
 import { AccountsViewComponent } from './account/components/accounts-view/accounts-view.component';
 import { LoanTableComponent } from './loan/components/loan-table/loan-table.component';
 import { LoanViewComponent } from './loan/components/loan-view/loan-view.component';
+import { CardListComponent } from './card/components/card-list/card-list.component';
+import { CardViewComponent } from './card/components/card-view/card-view.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { LoanViewComponent } from './loan/components/loan-view/loan-view.compone
 
     LoanViewComponent,
     LoanTableComponent,
+    CardListComponent,
+    CardViewComponent,
   ],
   imports: [
     BrowserModule,
