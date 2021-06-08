@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
   loginUser(): void {
     // Perform request.
     this.userService.loginUser({
-      username: this.userDetails.username.value.toLowerCase(),
+      username: this.userDetails.username.value,
       password: this.userDetails.password.value,
     })
     .pipe(take(1), catchError(err => throwError(err)))

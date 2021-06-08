@@ -1,1 +1,34 @@
-<p>card-list works!</p>
+<div>
+  <h2>Cards</h2>
+  <table class="table table-bordered table-striped table-responsive-lg">
+    <thead>
+      <tr>
+        <th>Card Type</th>
+        <th>Card Number</th>
+        <th>Card Status</th>
+        <th>Active Since</th>
+        <th>Expiration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let card of cards">
+        <td scope="row">{{ displayCardType(card) }}</td>
+        <td>{{ displayCardNumber(card) }}</td>
+        <td>{{ displayCardStatus(card) }}</td>
+        <td>{{ displayCardActivation(card) }}</td>
+        <td>{{ displayCardExpiration(card) }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <ul class="list-group">
+    <li *ngFor="let card of cards"
+        [ngClass]="{
+          'list-group-item mb-1 border-top d-flex justify-content-between card-item': true,
+          'pending': card.confirmed === false
+        }"
+        (click)="onCardSelect(card.id)">
+      <span>{{card.numberHash}}</span>
+      <span *ngIf="!card.confirmed">Pending</span>
+    </li>
+  </ul> -->
+</div>
