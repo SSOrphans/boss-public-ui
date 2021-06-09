@@ -15,10 +15,12 @@ export class ForgotPasswordComponent implements OnInit {
   requiredFieldMarker?: string;
   emptyFormMsg?: string;
   isResetComplete: boolean;
+  hasError?: boolean;
 
   constructor(private userService: UserHttpService) {
     this.isResetComplete = false;
     this.disableSubmitBtn = false;
+    this.hasError = false;
     this.resetForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
     });
@@ -56,7 +58,7 @@ export class ForgotPasswordComponent implements OnInit {
           this.isResetComplete = true;
         },
         (err) => {
-          // TODO: redirect to 404 not found
+          this.hasError = true;
           console.log(err);
         }
       );

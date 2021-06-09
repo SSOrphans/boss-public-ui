@@ -1,9 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { UserHttpService } from 'src/app/shared/services/user-http.service';
 import { catchError, take } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,6 +24,7 @@ export class ResetPasswordComponent implements OnInit {
   requiredFieldMarker?: string;
   emptyFormMsg?: string;
   token?: string;
+  hasError?: boolean;
 
   constructor(
     private redirect: Router,
@@ -23,28 +32,36 @@ export class ResetPasswordComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.disableSubmitBtn = false;
-    this.passwordForm = new FormGroup({
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(64),
-        // must at least have 1 lower, upper, number, and special character
-        Validators.pattern(
-          '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$'
-        ),
-      ]),
-    });
+    this.hasError = false;
+    this.passwordForm = new FormGroup(
+      {
+        password: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(64),
+          // must at least have 1 lower, upper, number, and special character
+          Validators.pattern(
+            '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$'
+          ),
+        ]),
+        confirmPassword: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(64),
+          // must at least have 1 lower, upper, number, and special character
+          Validators.pattern(
+            '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$'
+          ),
+        ]),
+      },
+      { validators: passwordSameValidation }
+    );
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((param)=>{
-      if(param['tk']){
-        this.token = param['tk'];
-      }
-      else{
-        this.redirect.navigate(['home']);
-      }
-    });
+    this.route.queryParams.subscribe(
+      (params) => (this.token = params['token'])
+    );
   }
 
   get userInput(): any {
@@ -52,18 +69,17 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   submitForm() {
-    if (this.passwordForm.invalid) {
-      this.emptyFormMsg = 'Please fill out the form.';
-      this.requiredFieldMarker = '*';
-      return;
-    }
+    // if (this.passwordForm.invalid) {
+    //   this.emptyFormMsg = 'Please fill out the form.';
+    //   this.requiredFieldMarker = '*';
+    //   return;
+    // }
     this.updatePassword();
   }
 
   updatePassword() {
     this.disableSubmitBtn = true;
     this.passwordForm.disable();
-    // TODO: AWS SNS; token is hardcoded for endpoint test
     this.userService
       .resetPass({
         token: this.token,
@@ -77,11 +93,11 @@ export class ResetPasswordComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.redirect.navigate(['/home']);
+          this.redirect.navigate(['/login']);
         },
         (err: any) => {
           this.emptyFormMsg = err.error;
-          // TODO: redirect to 404 not found
+          this.hasError = true;
           this.disableSubmitBtn = false;
           this.passwordForm.markAsUntouched();
           this.passwordForm.enable();
@@ -89,3 +105,13 @@ export class ResetPasswordComponent implements OnInit {
       );
   }
 }
+export const passwordSameValidation: ValidatorFn = (
+  control: AbstractControl
+): ValidationErrors | null => {
+  const password = control.get('password');
+  const confirm = control.get('confirmPassword');
+
+  return password && confirm && password.value === confirm.value
+    ? { passwordSame: true }
+    : null;
+};

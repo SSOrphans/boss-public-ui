@@ -1,26 +1,25 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {ProfileInfo} from 'src/app/user/models/profile-info';
-import {environment} from 'src/environments/environment';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ProfileInfo } from 'src/app/user/models/profile-info';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserHttpService {
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   registerUser(user: object): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/users`, user);
+    return this.http.post(`${environment.apiUrl}users/registration`, user);
   }
 
   forgotPass(email: object): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/user/email`, email);
+    return this.http.post(`${environment.apiUrl}users/forgot-password`, email);
   }
 
-  resetPass(jwt: object): Observable<any>{
-    return this.http.put(`${environment.apiUrl}/user/password`, jwt)
+  resetPass(jwt: object): Observable<any> {
+    return this.http.put(`${environment.apiUrl}users/reset-password`, jwt);
   }
 
   getUserProfileInfo(userID: number): Observable<ProfileInfo> {

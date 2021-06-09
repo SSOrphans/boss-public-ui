@@ -1,23 +1,23 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {UserHttpService} from '../../shared/services/user-http.service';
-import {catchError, take} from 'rxjs/operators';
-import {throwError} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserHttpService } from '../../shared/services/user-http.service';
+import { catchError, take } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
   emptyFormMsg?: string;
   requiredFieldMarker?: string;
   registerForm!: FormGroup;
   disableSubmitBtn = false;
+  hasError = false;
 
-  constructor(private userService: UserHttpService, private redirect: Router) {
-  }
+  constructor(private userService: UserHttpService, private redirect: Router) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.redirect.navigate(['/home']);
+          this.redirect.navigate(['/login']);
         },
         (err: any) => {
           if (err.status === 409) {
@@ -79,6 +79,7 @@ export class RegisterComponent implements OnInit {
           } else {
             // TODO: redirect to 404 not found
           }
+          this.hasError = true;
           this.disableSubmitBtn = false;
           this.registerForm.markAsUntouched();
           this.registerForm.enable();
