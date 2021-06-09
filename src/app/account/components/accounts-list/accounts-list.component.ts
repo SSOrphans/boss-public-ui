@@ -1,11 +1,12 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccountHttpService} from '../../../shared/services/account-http.service';
 
 @Component({
   selector: 'app-accounts-list',
   templateUrl: './accounts-list.component.html',
-  styleUrls: ['./accounts-list.component.css']
+  styleUrls: ['./accounts-list.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AccountsListComponent implements OnInit, OnChanges {
 
@@ -46,7 +47,7 @@ export class AccountsListComponent implements OnInit, OnChanges {
       this.httpService.getAccounts(this.id)
         .subscribe(
           this.groupAccounts,
-          (error: any) => {
+          () => {
           }
         );
     } catch (err) {
