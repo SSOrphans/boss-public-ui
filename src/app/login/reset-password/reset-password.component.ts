@@ -69,11 +69,11 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   submitForm() {
-    // if (this.passwordForm.invalid) {
-    //   this.emptyFormMsg = 'Please fill out the form.';
-    //   this.requiredFieldMarker = '*';
-    //   return;
-    // }
+    if (this.passwordForm.invalid) {
+      this.emptyFormMsg = 'Please fill out the form.';
+      this.requiredFieldMarker = '*';
+      return;
+    }
     this.updatePassword();
   }
 

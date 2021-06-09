@@ -13,6 +13,7 @@ describe('ResetPasswordComponent', () => {
   let fixture: ComponentFixture<ResetPasswordComponent>;
   let form: any;
   let password: any;
+  let confirmPassword: any;
   let validPassword: any;
   let invalidPassword: any;
   let userService: UserHttpService;
@@ -30,7 +31,7 @@ describe('ResetPasswordComponent', () => {
           provide: ActivatedRoute,
           useValue: {
             queryParams: of({
-              tk: 'sometoken',
+              token: 'sometoken',
             }),
           },
         },
@@ -46,6 +47,7 @@ describe('ResetPasswordComponent', () => {
 
     form = component.passwordForm;
     password = component.passwordForm.controls.password;
+    confirmPassword = component.passwordForm.controls.confirmPassword;
     validPassword = 'TEst!@34';
     invalidPassword = 'test1234';
   });
@@ -82,12 +84,20 @@ describe('ResetPasswordComponent', () => {
 
   it('invalid password', () => {
     password.setValue(invalidPassword);
+    confirmPassword.setValue(invalidPassword);
     expect(password.invalid).toBeTruthy();
   });
 
   it('valid form', () => {
     password.setValue(validPassword);
+    confirmPassword.setValue(validPassword);
     expect(form.valid).toBeTruthy();
+  });
+
+  it('invalid form confirmPassword', () => {
+    password.setValue(validPassword);
+    confirmPassword.setValue(invalidPassword);
+    expect(form.invalid).toBeTruthy();
   });
 
   it('invalid form', () => {
