@@ -65,11 +65,11 @@
           </div>
           <div class="row col form-group">
             <button type="submit" class="btn btn-primary mr-3" [disabled]="disableSubmitBtn">Login</button>
-            <p class="text-danger" *ngIf="loginForm.invalid || loginForm.untouched">
-              {{ emptyFormMsg }}
-            </p>
             <button class="btn mr-3 p-0" routerLink="/login/register">Register</button>
             <button class="btn mr-3 p-0" routerLink="/login/forgotpassword">Forgot your password?</button>
+            <p class="text-danger pt-2" *ngIf="loginForm.invalid || loginForm.untouched">
+              {{ emptyFormMsg }}
+            </p>
           </div>
         </form>
       </div>
