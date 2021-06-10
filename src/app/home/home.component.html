@@ -1,3 +1,27 @@
-<div class="col-10 col-sm-8 col-md-6 col-lg-4 mx-auto mt-5">
-    <h2>Welcome to the Bank of Smoothstack!</h2>
+<div class="container-fluid px-0">
+  <div class="container-fluid position-absolute" style="z-index: 1">
+    <h1 class="display-4 font-weight-bold col-10 col-sm-8 col-md-6 col-lg-4 mx-auto" style="top: 25vh;">
+      Welcome to the Bank of Smoothstack
+    </h1>
+  </div>
+  <ngb-carousel class="col px-0">
+    <ng-template ngbSlide>
+      <div class="wrapper">
+        <img
+          class="img-fluid ng-carousel-template-img"
+          [src]="images[0]"
+          alt="First slide"
+        />
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div>
+        <img
+          class="img-fluid ng-carousel-template-img"
+          [src]="images[1]"
+          alt="Second slide"
+        />
+      </div>
+    </ng-template>
+  </ngb-carousel>
 </div>

@@ -1,0 +1,7 @@
+.ng-carousel-template-img {
+    position: relative;
+    object-fit: cover;
+    opacity: 75%;
+    height: 90vh;
+    width: 100%;
+}
