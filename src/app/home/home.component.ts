@@ -14,7 +14,8 @@ export class HomeComponent implements OnInit {
   constructor(config: NgbCarouselConfig) {
     config.interval = 8000;
     config.keyboard = true;
-    config.pauseOnHover = true;
+    config.pauseOnHover = false;
+    config.showNavigationIndicators = false;
    }
 
   ngOnInit(): void {

@@ -1,9 +1,7 @@
-.ng-carousel-template-height {
-    height: 75vh;
-}
-
 .ng-carousel-template-img {
     position: relative;
-    object-fit: contain;
-    transform: translateY(-30%)
+    object-fit: cover;
+    opacity: 75%;
+    height: 75vh;
+    width: 100%;
 }
