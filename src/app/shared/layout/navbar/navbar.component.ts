@@ -8,7 +8,10 @@ import { NavbarService } from '../../services/navbar.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(public navlink: NavbarService, private redirect: Router) {}
+  isCollapsed: boolean;
+  constructor(public navlink: NavbarService, private redirect: Router) {
+    this.isCollapsed = true;
+  }
 
   ngOnInit(): void {}
 
