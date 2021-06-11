@@ -22,11 +22,11 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
 
-  { path: 'login/register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent },
 
-  { path: 'login/forgotpassword', component: ForgotPasswordComponent },
+  { path: 'forgotpassword', component: ForgotPasswordComponent },
 
-  { path: 'login/resetpassword', component: ResetPasswordComponent },
+  { path: 'resetpassword', component: ResetPasswordComponent },
 
   {
     path: 'profile',

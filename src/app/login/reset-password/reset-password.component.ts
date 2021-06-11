@@ -36,12 +36,13 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((param)=>{
-      if(param['tk']){
+  ngOnInit(): void {}
+
+  ngAfterContentChecked(): void {
+    this.route.queryParams.subscribe((param) => {
+      if (param['tk']) {
         this.token = param['tk'];
-      }
-      else{
+      } else {
         this.redirect.navigate(['home']);
       }
     });
@@ -63,7 +64,6 @@ export class ResetPasswordComponent implements OnInit {
   updatePassword() {
     this.disableSubmitBtn = true;
     this.passwordForm.disable();
-    // TODO: AWS SNS; token is hardcoded for endpoint test
     this.userService
       .resetPass({
         token: this.token,
@@ -81,7 +81,6 @@ export class ResetPasswordComponent implements OnInit {
         },
         (err: any) => {
           this.emptyFormMsg = err.error;
-          // TODO: redirect to 404 not found
           this.disableSubmitBtn = false;
           this.passwordForm.markAsUntouched();
           this.passwordForm.enable();

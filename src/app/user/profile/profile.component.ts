@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../../shared/services/navbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -8,13 +9,14 @@ import { NavbarService } from '../../shared/services/navbar.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private navlink: NavbarService) { }
+  constructor(private navlink: NavbarService, private redirect: Router) { }
 
   ngOnInit(): void {
   }
 
   ngAfterContentChecked(): void {
-    this.navlink.isLoginViewable = false;
+    if(!localStorage.getItem('clientPass')) {
+      this.redirect.navigate(['/home']);
+    }
   }
-
 }

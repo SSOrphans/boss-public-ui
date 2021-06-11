@@ -24,8 +24,4 @@ export class HomeComponent implements OnInit {
       '../assets/images/empty-office-building.jpg',
     ];
   }
-
-  ngAfterContentChecked(): void {
-    this.navlink.isLoginViewable = true;
-  }
 }

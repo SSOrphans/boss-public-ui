@@ -24,7 +24,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngAfterContentChecked(): void {
-    this.navlink.isLoginViewable = false;
+    if(localStorage.getItem('clientPass')) {
+      this.redirect.navigate(['/home']);
+    }
   }
 
   ngOnInit(): void {
@@ -52,7 +54,8 @@ export class LoginComponent implements OnInit {
       this.requiredMarker = '*';
       return;
     }
-
+    
+    localStorage.setItem('clientPass', "test");
     this.loginUser();
   }
 
