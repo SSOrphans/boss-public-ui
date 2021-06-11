@@ -17,9 +17,14 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   disableSubmitBtn = false;
 
-  constructor(private userService: UserHttpService,
-              private navlink: NavbarService,
-              private redirect: Router) {
+  constructor(
+    private userService: UserHttpService,
+    private navlink: NavbarService,
+    private redirect: Router
+  ) {}
+
+  ngAfterContentChecked(): void {
+    this.navlink.isLoginViewable = false;
   }
 
   ngOnInit(): void {
@@ -34,15 +39,17 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(64),
-        Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$')
+        Validators.pattern(
+          '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$'
+        ),
       ]),
     });
   }
 
   submitForm(): void {
     if (this.loginForm.invalid) {
-      this.emptyFormMsg = "Please fill out the form.";
-      this.requiredMarker = "*";
+      this.emptyFormMsg = 'Please fill out the form.';
+      this.requiredMarker = '*';
       return;
     }
 
@@ -55,7 +62,7 @@ export class LoginComponent implements OnInit {
 
   captureResult(result: any): void {
     // Cache JWT to client.
-    localStorage.setItem("clientPass", result["token"]);
+    localStorage.setItem('clientPass', result['token']);
     this.navlink.isLoginViewable = false;
     this.navlink.isProfileViewable = true;
     this.redirect.navigate(['/home']);
@@ -63,18 +70,22 @@ export class LoginComponent implements OnInit {
 
   loginUser(): void {
     // Perform request.
-    this.userService.loginUser({
-      username: this.userDetails.username.value.toLowerCase(),
-      password: this.userDetails.password.value,
-    })
-    .pipe(take(1), catchError(err => throwError(err)))
-    .subscribe(
-      (result) => this.captureResult(result),
-      (err: any) => {
-        this.disableSubmitBtn = false;
-        this.loginForm.markAsUntouched();
-        this.loginForm.enable();
-      }
-    );
+    this.userService
+      .loginUser({
+        username: this.userDetails.username.value.toLowerCase(),
+        password: this.userDetails.password.value,
+      })
+      .pipe(
+        take(1),
+        catchError((err) => throwError(err))
+      )
+      .subscribe(
+        (result) => this.captureResult(result),
+        (err: any) => {
+          this.disableSubmitBtn = false;
+          this.loginForm.markAsUntouched();
+          this.loginForm.enable();
+        }
+      );
   }
 }

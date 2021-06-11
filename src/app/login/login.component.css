@@ -1,0 +1,10 @@
+.login-bg {
+    background-image: url("../../assets/images/happy-cow.jpg");
+    background-size: cover;
+    height: 100vh;
+}
+
+.login-position {
+    position: absolute;
+    left: 15%;
+}
