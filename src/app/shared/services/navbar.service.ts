@@ -5,10 +5,12 @@ import { Injectable } from '@angular/core';
 })
 export class NavbarService {
   isLoginViewable: boolean;
+  isLogoutViewable: boolean;
   isProfileViewable: boolean;
 
   constructor() {
     this.isLoginViewable = true;
+    this.isLogoutViewable = false;
     this.isProfileViewable = false;
   }
 }
