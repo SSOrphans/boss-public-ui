@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarService } from '../shared/services/navbar.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +10,7 @@ import { NavbarService } from '../shared/services/navbar.service';
 export class HomeComponent implements OnInit {
   images: any;
 
-  constructor(config: NgbCarouselConfig, private navlink: NavbarService) {
+  constructor(config: NgbCarouselConfig) {
     config.interval = 8000;
     config.keyboard = true;
     config.pauseOnHover = false;
