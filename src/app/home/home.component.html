@@ -1,6 +1,6 @@
-<div class="container-fluid px-0">
-  <div class="container-fluid position-absolute" style="z-index: 1">
-    <div class="col-10 col-sm-8 col-md-6 col-lg-4 mx-auto" style="top: 25vh">
+<div class="d-flex homepage-bg">
+  <div class="align-self-center position-absolute" style="z-index: 2">
+    <div class="container col-10 col-sm-9 col-md-8 col-lg-7">
       <h1 class="display-4 font-weight-bold">Bank of Smoothstack</h1>
       <p>
         An easy way to manage your bank account on the web. Bank of Smoothstack
@@ -10,24 +10,20 @@
       </p>
     </div>
   </div>
-  <ngb-carousel class="col px-0">
+  <ngb-carousel class="w-100">
     <ng-template ngbSlide>
-      <div class="wrapper">
-        <img
+      <img
           class="img-fluid ng-carousel-template-img"
           [src]="images[0]"
           alt="First slide"
         />
-      </div>
     </ng-template>
     <ng-template ngbSlide>
-      <div>
-        <img
+      <img
           class="img-fluid ng-carousel-template-img"
           [src]="images[1]"
           alt="Second slide"
         />
-      </div>
     </ng-template>
   </ngb-carousel>
 </div>

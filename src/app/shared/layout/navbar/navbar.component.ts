@@ -19,11 +19,15 @@ export class NavbarComponent implements OnInit {
       this.navlink.isLoginViewable = true;
       this.navlink.isLogoutViewable = false;
       this.navlink.isProfileViewable = false;
+      this.navlink.isAccountsViewable = false;
+      this.navlink.isLoansViewable = false;
     }
     else{
       this.navlink.isLoginViewable = false;
       this.navlink.isLogoutViewable = true;
       this.navlink.isProfileViewable = true;
+      this.navlink.isAccountsViewable = true;
+      this.navlink.isLoansViewable = true;
     }
   }
 
