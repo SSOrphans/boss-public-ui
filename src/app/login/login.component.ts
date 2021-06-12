@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
     private redirect: Router
   ) {}
 
-  ngAfterContentChecked(): void {
-    if(localStorage.getItem('clientPass')) {
+  ngDoCheck(): void {
+    if (localStorage.getItem('clientPass')) {
       this.redirect.navigate(['/home']);
     }
   }
@@ -54,8 +54,7 @@ export class LoginComponent implements OnInit {
       this.requiredMarker = '*';
       return;
     }
-    
-    localStorage.setItem('clientPass', "test");
+
     this.loginUser();
   }
 
@@ -66,9 +65,6 @@ export class LoginComponent implements OnInit {
   captureResult(result: any): void {
     // Cache JWT to client.
     localStorage.setItem('clientPass', result['token']);
-    this.navlink.isLoginViewable = false;
-    this.navlink.isProfileViewable = true;
-    this.redirect.navigate(['/home']);
   }
 
   loginUser(): void {
@@ -88,6 +84,11 @@ export class LoginComponent implements OnInit {
           this.disableSubmitBtn = false;
           this.loginForm.markAsUntouched();
           this.loginForm.enable();
+          
+          // localStorage.setItem(
+          //   'clientPass',
+          //   'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOiIxIn0.b0lpgg9kledCj3lJQDeEEAcaJO7nom68AAeegE6YEVZ_ZyugvHrr_IQwLkGLhaDENOIddIBQ3gpmBUs2T6bc-Q'
+          // );
         }
       );
   }

@@ -36,8 +36,8 @@ const routes: Routes = [
       { path: 'update', component: UpdateProfileComponent },
     ],
   },
-  { path: 'users/:id/accounts', component: AccountsListComponent },
-  { path: 'users/:id/loans', component: LoanViewComponent },
+  { path: 'accounts', component: AccountsListComponent },
+  { path: 'loans', component: LoanViewComponent },
   { path: 'accounts/:id', component: AccountTransactionViewComponent },
   {
     path: 'accounts/:id/transactions',

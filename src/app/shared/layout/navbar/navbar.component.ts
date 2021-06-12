@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  ngAfterContentChecked(): void {
+  ngDoCheck(): void {
     if(!localStorage.getItem('clientPass')) {
       this.navlink.isLoginViewable = true;
       this.navlink.isLogoutViewable = false;

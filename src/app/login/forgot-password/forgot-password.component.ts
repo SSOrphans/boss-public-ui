@@ -27,8 +27,8 @@ export class ForgotPasswordComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  ngAfterContentChecked(): void {
-    if(localStorage.getItem('clientPass')) {
+  ngDoCheck(): void {
+    if (localStorage.getItem('clientPass')) {
       this.redirect.navigate(['/home']);
     }
   }

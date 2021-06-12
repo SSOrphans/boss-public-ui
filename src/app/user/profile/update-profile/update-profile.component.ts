@@ -8,7 +8,7 @@ import { throwError } from 'rxjs';
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.component.html',
-  styleUrls: ['./update-profile.component.css']
+  styleUrls: ['./update-profile.component.css'],
 })
 export class UpdateProfileComponent implements OnInit {
   emptyFormMsg?: string;
@@ -57,13 +57,19 @@ export class UpdateProfileComponent implements OnInit {
     });
   }
 
+  ngDoCheck(): void {
+    if (!localStorage.getItem('clientPass')) {
+      this.redirect.navigate(['/home']);
+    }
+  }
+
   submitForm(): void {
     if (this.updateForm.invalid) {
       this.emptyFormMsg = 'Please fill out the form.';
       this.requiredFieldMarker = '*';
       return;
     }
-    
+
     this.updateProfile();
   }
 
