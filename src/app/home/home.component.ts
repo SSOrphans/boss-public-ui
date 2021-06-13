@@ -5,10 +5,9 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [NgbCarouselConfig]
+  providers: [NgbCarouselConfig],
 })
 export class HomeComponent implements OnInit {
-
   images: any;
 
   constructor(config: NgbCarouselConfig) {
@@ -16,10 +15,12 @@ export class HomeComponent implements OnInit {
     config.keyboard = true;
     config.pauseOnHover = false;
     config.showNavigationIndicators = false;
-   }
-
-  ngOnInit(): void {
-    this.images = ["../assets/images/office-building.jpg", "../assets/images/empty-office-building.jpg"]
   }
 
+  ngOnInit(): void {
+    this.images = [
+      '../assets/images/office-building.jpg',
+      '../assets/images/empty-office-building.jpg',
+    ];
+  }
 }

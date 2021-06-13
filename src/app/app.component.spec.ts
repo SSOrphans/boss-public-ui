@@ -3,9 +3,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/layout/navbar/navbar.component';
 
-import {Title} from '@angular/platform-browser';
-
-
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({

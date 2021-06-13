@@ -1,78 +1,91 @@
-<div class="container">
-  <main>
-    <div class="col-10 col-sm-8 col-md-7 col-lg-6 col-xl-5 mx-auto mt-5">
-      <div>
-        <h2>User Login</h2>
-      </div>
-      <div class="card col mx-auto mt-3">
-        <form class="ml-3 mr-3" [formGroup]="loginForm" (ngSubmit)="submitForm()">
-          <div class="form-group mt-3">
-            <label>Username</label>
-            <input
-              type="text"
-              formControlName="username"
-              class="form-control"
-              placeholder="Enter a username"
-            />
-            <div
-              class="text-danger"
-              *ngIf="loginForm.invalid &&
-                     (loginForm.get('username')?.dirty ||
-                      loginForm.get('username')?.touched)">
-              <p *ngIf="loginForm.get('username')?.hasError('required')">
-                Username is required.
-              </p>
-              <p *ngIf="loginForm.get('username')?.hasError('pattern')">
-                Usernames can have numbers, letters, underscore, and dash.
-                Cannot start with a number.
-              </p>
-              <p *ngIf="loginForm.get('username')?.hasError('maxlength')">
-                Usernames cannot have more than 16 characters.
-              </p>
-              <p *ngIf="loginForm.get('username')?.hasError('minlength')">
-                Usernames must have a minimum of 2 characters.
-              </p>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              formControlName="password"
-              class="form-control"
-              placeholder="Enter a password"
-            />
-            <div
-              class="text-danger"
-              *ngIf="loginForm.invalid &&
-                     (loginForm.get('password')?.dirty ||
-                      loginForm.get('password')?.touched)">
-              <p *ngIf="loginForm.get('password')?.hasError('required')">
-                Password is required.
-              </p>
-              <p *ngIf="loginForm.get('password')?.hasError('maxlength')">
-                Password cannot have more than 64 characters.
-              </p>
-              <p *ngIf="loginForm.get('password')?.hasError('minlength')">
-                Password must have a minimum of 8 characters.
-              </p>
-              <p *ngIf="loginForm.get('password')?.hasError('pattern')">
-                Password must contain at least 1 of the following: lowercase,
-                uppercase, number, and special character.
-              </p>
-            </div>
-          </div>
-          <div class="row col form-group">
-            <button type="submit" class="btn btn-primary mr-3" [disabled]="disableSubmitBtn">Login</button>
-            <button class="btn mr-3 p-0" routerLink="/login/register">Register</button>
-            <button class="btn mr-3 p-0" routerLink="/login/forgotpassword">Forgot your password?</button>
-            <p class="text-danger pt-2" *ngIf="loginForm.invalid || loginForm.untouched">
-              {{ emptyFormMsg }}
+<div class="d-flex align-items-center login-bg animate-fade">
+  <div class="flex-column d-inline-flex mr-5 login-position">
+    <div class="card shadow bg-light flex-row">
+      <h2 class="card-header border-0">Login</h2>
+      <form class="card-body" [formGroup]="loginForm" (ngSubmit)="submitForm()">
+        <div class="form-group">
+          <label>Username</label>
+          <input
+            type="text"
+            formControlName="username"
+            class="form-control"
+            placeholder="Enter a username"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              loginForm.invalid &&
+              (loginForm.get('username')?.dirty ||
+                loginForm.get('username')?.touched)
+            "
+          >
+            <p *ngIf="loginForm.get('username')?.hasError('required')">
+              Username is required.
+            </p>
+            <p *ngIf="loginForm.get('username')?.hasError('pattern')">
+              Usernames can have numbers, letters, underscore, and dash. Cannot
+              start with a number.
+            </p>
+            <p *ngIf="loginForm.get('username')?.hasError('maxlength')">
+              Usernames cannot have more than 16 characters.
+            </p>
+            <p *ngIf="loginForm.get('username')?.hasError('minlength')">
+              Usernames must have a minimum of 2 characters.
             </p>
           </div>
-        </form>
-      </div>
+        </div>
+
+        <div class="form-group mt-4">
+          <label>Password</label>
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            placeholder="Enter a password"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              loginForm.invalid &&
+              (loginForm.get('password')?.dirty ||
+                loginForm.get('password')?.touched)
+            "
+          >
+            <p *ngIf="loginForm.get('password')?.hasError('required')">
+              Password is required.
+            </p>
+            <p *ngIf="loginForm.get('password')?.hasError('maxlength')">
+              Password cannot have more than 64 characters.
+            </p>
+            <p *ngIf="loginForm.get('password')?.hasError('minlength')">
+              Password must have a minimum of 8 characters.
+            </p>
+            <p *ngIf="loginForm.get('password')?.hasError('pattern')">
+              Password must contain at least 1 of the following: lowercase,
+              uppercase, number, and special character.
+            </p>
+          </div>
+        </div>
+        <div class="flex-column form-group mt-4">
+          <button
+            type="submit"
+            class="btn btn-primary mr-3"
+            [disabled]="disableSubmitBtn"
+          >
+            Login
+          </button>
+          <button class="btn mr-3 p-0" routerLink="/register">Register</button>
+          <button class="btn p-0" routerLink="/forgotpassword">
+            Forgot your password?
+          </button>
+          <p
+            class="text-danger pt-2"
+            *ngIf="loginForm.invalid || loginForm.untouched"
+          >
+            {{ emptyFormMsg }}
+          </p>
+        </div>
+      </form>
     </div>
-  </main>
+  </div>
 </div>

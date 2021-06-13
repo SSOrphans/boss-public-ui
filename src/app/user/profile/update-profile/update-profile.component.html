@@ -1,270 +1,263 @@
-<div class="container-fluid">
-    <div class="col-10 col-sm-8 col-md-6 col-lg-4 mx-auto mt-5">
-      <div>
-        <h2>Update Profile</h2>
-      </div>
-      <div class="card col mx-auto mt-3">
-        <form
-          class="ml-3 mr-3"
-          [formGroup]="updateForm"
-          (ngSubmit)="submitForm()"
-        >
-          <div class="form-group mt-3">
-            <label
-              >Email address
-              <span
-                class="text-danger"
-                *ngIf="updateForm.get('email')?.invalid"
-                >{{ requiredFieldMarker }}</span
-              ></label
-            >
-            <input
-              type="email"
-              formControlName="email"
-              class="form-control"
-              placeholder="Enter an email"
-            />
-            <div
+<div class="d-flex justify-content-center my-5 animate-fade">
+  <div class="wrapper col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+    <div class="card shadow flex-row">
+      <h2 class="card-header border-0" style="max-width: 11rem">
+        Update Profile
+      </h2>
+      <form
+        class="card-body"
+        [formGroup]="updateForm"
+        (ngSubmit)="submitForm()"
+      >
+        <div class="form-group mt-3">
+          <label
+            >Email address
+            <span
               class="text-danger"
-              *ngIf="
-                updateForm.invalid &&
-                (updateForm.get('email')?.dirty ||
-                  updateForm.get('email')?.touched)
-              "
-            >
-              <p *ngIf="updateForm.get('email')?.hasError('required')">
-                Email is required.
-              </p>
-              <p *ngIf="updateForm.get('email')?.hasError('email')">
-                Invalid email.
-              </p>
-            </div>
-          </div>
-  
-          <div class="form-group">
-            <label
-              >Name
-              <span
-                class="text-danger"
-                *ngIf="updateForm.get('fullName')?.invalid"
-                >{{ requiredFieldMarker }}</span
-              ></label
-            >
-            <input
-              type="text"
-              formControlName="fullName"
-              class="form-control"
-              placeholder="Enter your name"
-            />
-            <div
-              class="text-danger"
-              *ngIf="
-                updateForm.invalid &&
-                (updateForm.get('fullName')?.dirty ||
-                  updateForm.get('fullName')?.touched)
-              "
-            >
-              <p *ngIf="updateForm.get('fullName')?.hasError('required')">
-                Name is required.
-              </p>
-              <p *ngIf="updateForm.get('fullName')?.hasError('maxlength')">
-                Cannot have more than 64 characters.
-              </p>
-              <p *ngIf="updateForm.get('fullName')?.hasError('pattern')">
-                Invalid name. Only letters and spaces are allowed.
-              </p>
-            </div>
-          </div>
-  
-          <div class="form-group">
-            <label
-              >Address
-              <span
-                class="text-danger"
-                *ngIf="updateForm.get('address')?.invalid"
-                >{{ requiredFieldMarker }}</span
-              ></label
-            >
-            <input
-              type="text"
-              formControlName="address"
-              class="form-control"
-              placeholder="Enter your address"
-            />
-            <div
-              class="text-danger"
-              *ngIf="
-                updateForm.invalid &&
-                (updateForm.get('address')?.dirty ||
-                  updateForm.get('address')?.touched)
-              "
-            >
-              <p *ngIf="updateForm.get('address')?.hasError('required')">
-                Address is required.
-              </p>
-              <p *ngIf="updateForm.get('address')?.hasError('maxlength')">
-                Cannot have more than 255 characters.
-              </p>
-              <p *ngIf="updateForm.get('address')?.hasError('pattern')">
-                Invalid address. Only letters, numbers, and spaces are allowed.
-              </p>
-            </div>
-          </div>
-  
-          <div class="form-group">
-            <label
-              >City
-              <span
-                class="text-danger"
-                *ngIf="updateForm.get('city')?.invalid"
-                >{{ requiredFieldMarker }}</span
-              ></label
-            >
-            <input
-              type="text"
-              formControlName="city"
-              class="form-control"
-              placeholder="Enter your city"
-            />
-            <div
-              class="text-danger"
-              *ngIf="
-                updateForm.invalid &&
-                (updateForm.get('city')?.dirty ||
-                  updateForm.get('city')?.touched)
-              "
-            >
-              <p *ngIf="updateForm.get('city')?.hasError('required')">
-                City is required.
-              </p>
-              <p *ngIf="updateForm.get('city')?.hasError('maxlength')">
-                Cannot have more than 64 characters.
-              </p>
-              <p *ngIf="updateForm.get('city')?.hasError('pattern')">
-                Invalid city. Only letters are allowed.
-              </p>
-            </div>
-          </div>
-  
-          <div class="form-group">
-            <label
-              >State
-              <span
-                class="text-danger"
-                *ngIf="updateForm.get('state')?.invalid"
-                >{{ requiredFieldMarker }}</span
-              ></label
-            >
-            <input
-              type="text"
-              formControlName="state"
-              class="form-control"
-              placeholder="Enter your state"
-            />
-            <div
-              class="text-danger"
-              *ngIf="
-                updateForm.invalid &&
-                (updateForm.get('state')?.dirty ||
-                  updateForm.get('state')?.touched)
-              "
-            >
-              <p *ngIf="updateForm.get('state')?.hasError('required')">
-                State is required.
-              </p>
-              <p *ngIf="updateForm.get('state')?.hasError('maxlength')">
-                Cannot have more than 32 characters.
-              </p>
-              <p *ngIf="updateForm.get('state')?.hasError('pattern')">
-                Invalid state. Only letters and spaces are allowed.
-              </p>
-            </div>
-          </div>
-  
-          <div class="form-group">
-            <label
-              >Zip Code
-              <span
-                class="text-danger"
-                *ngIf="updateForm.get('zip')?.invalid"
-                >{{ requiredFieldMarker }}</span
-              ></label
-            >
-            <input
-              type="text"
-              formControlName="zip"
-              class="form-control"
-              placeholder="Enter your zip code"
-            />
-            <div
-              class="text-danger"
-              *ngIf="
-                updateForm.invalid &&
-                (updateForm.get('zip')?.dirty ||
-                  updateForm.get('zip')?.touched)
-              "
-            >
-              <p *ngIf="updateForm.get('zip')?.hasError('required')">
-                Zip code is required.
-              </p>
-              <p *ngIf="updateForm.get('zip')?.hasError('pattern')">
-                Invalid zip code.  Only numbers are allowed.
-              </p>
-            </div>
-          </div>
-  
-          <div class="form-group">
-            <label
-              >Phone
-              <span
-                class="text-danger"
-                *ngIf="updateForm.get('phone')?.invalid"
-                >{{ requiredFieldMarker }}</span
-              ></label
-            >
-            <input
-              type="text"
-              formControlName="phone"
-              class="form-control"
-              placeholder="Enter your phone number"
-            />
-            <div
-              class="text-danger"
-              *ngIf="
-                updateForm.invalid &&
-                (updateForm.get('phone')?.dirty ||
-                  updateForm.get('phone')?.touched)
-              "
-            >
-              <p *ngIf="updateForm.get('phone')?.hasError('required')">
-                Phone number is required.
-              </p>
-              <p *ngIf="updateForm.get('phone')?.hasError('maxlength')">
-                Cannot have more than 16 characters.
-              </p>
-              <p *ngIf="updateForm.get('phone')?.hasError('pattern')">
-                Invalid phone number. Only numbers allowed.
-              </p>
-            </div>
-          </div>
-  
-          <div class="form-group">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              [disabled]="disableSubmitBtn"
-            >
-              Update
-            </button>
-            <p
-              class="text-danger"
-              *ngIf="updateForm.invalid || updateForm.untouched"
-            >
-              {{ emptyFormMsg }}
+              *ngIf="updateForm.get('email')?.invalid"
+              >{{ requiredFieldMarker }}</span
+            ></label
+          >
+          <input
+            type="email"
+            formControlName="email"
+            class="form-control"
+            placeholder="Enter an email"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              updateForm.invalid &&
+              (updateForm.get('email')?.dirty ||
+                updateForm.get('email')?.touched)
+            "
+          >
+            <p *ngIf="updateForm.get('email')?.hasError('required')">
+              Email is required.
+            </p>
+            <p *ngIf="updateForm.get('email')?.hasError('email')">
+              Invalid email.
             </p>
           </div>
-        </form>
-      </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            >Name
+            <span
+              class="text-danger"
+              *ngIf="updateForm.get('fullName')?.invalid"
+              >{{ requiredFieldMarker }}</span
+            ></label
+          >
+          <input
+            type="text"
+            formControlName="fullName"
+            class="form-control"
+            placeholder="Enter your name"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              updateForm.invalid &&
+              (updateForm.get('fullName')?.dirty ||
+                updateForm.get('fullName')?.touched)
+            "
+          >
+            <p *ngIf="updateForm.get('fullName')?.hasError('required')">
+              Name is required.
+            </p>
+            <p *ngIf="updateForm.get('fullName')?.hasError('maxlength')">
+              Cannot have more than 64 characters.
+            </p>
+            <p *ngIf="updateForm.get('fullName')?.hasError('pattern')">
+              Invalid name. Only letters and spaces are allowed.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            >Address
+            <span
+              class="text-danger"
+              *ngIf="updateForm.get('address')?.invalid"
+              >{{ requiredFieldMarker }}</span
+            ></label
+          >
+          <input
+            type="text"
+            formControlName="address"
+            class="form-control"
+            placeholder="Enter your address"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              updateForm.invalid &&
+              (updateForm.get('address')?.dirty ||
+                updateForm.get('address')?.touched)
+            "
+          >
+            <p *ngIf="updateForm.get('address')?.hasError('required')">
+              Address is required.
+            </p>
+            <p *ngIf="updateForm.get('address')?.hasError('maxlength')">
+              Cannot have more than 255 characters.
+            </p>
+            <p *ngIf="updateForm.get('address')?.hasError('pattern')">
+              Invalid address. Only letters, numbers, and spaces are allowed.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            >City
+            <span class="text-danger" *ngIf="updateForm.get('city')?.invalid">{{
+              requiredFieldMarker
+            }}</span></label
+          >
+          <input
+            type="text"
+            formControlName="city"
+            class="form-control"
+            placeholder="Enter your city"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              updateForm.invalid &&
+              (updateForm.get('city')?.dirty || updateForm.get('city')?.touched)
+            "
+          >
+            <p *ngIf="updateForm.get('city')?.hasError('required')">
+              City is required.
+            </p>
+            <p *ngIf="updateForm.get('city')?.hasError('maxlength')">
+              Cannot have more than 64 characters.
+            </p>
+            <p *ngIf="updateForm.get('city')?.hasError('pattern')">
+              Invalid city. Only letters are allowed.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            >State
+            <span
+              class="text-danger"
+              *ngIf="updateForm.get('state')?.invalid"
+              >{{ requiredFieldMarker }}</span
+            ></label
+          >
+          <input
+            type="text"
+            formControlName="state"
+            class="form-control"
+            placeholder="Enter your state"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              updateForm.invalid &&
+              (updateForm.get('state')?.dirty ||
+                updateForm.get('state')?.touched)
+            "
+          >
+            <p *ngIf="updateForm.get('state')?.hasError('required')">
+              State is required.
+            </p>
+            <p *ngIf="updateForm.get('state')?.hasError('maxlength')">
+              Cannot have more than 32 characters.
+            </p>
+            <p *ngIf="updateForm.get('state')?.hasError('pattern')">
+              Invalid state. Only letters and spaces are allowed.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            >Zip Code
+            <span class="text-danger" *ngIf="updateForm.get('zip')?.invalid">{{
+              requiredFieldMarker
+            }}</span></label
+          >
+          <input
+            type="text"
+            formControlName="zip"
+            class="form-control"
+            placeholder="Enter your zip code"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              updateForm.invalid &&
+              (updateForm.get('zip')?.dirty || updateForm.get('zip')?.touched)
+            "
+          >
+            <p *ngIf="updateForm.get('zip')?.hasError('required')">
+              Zip code is required.
+            </p>
+            <p *ngIf="updateForm.get('zip')?.hasError('pattern')">
+              Invalid zip code. Only numbers are allowed.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            >Phone
+            <span
+              class="text-danger"
+              *ngIf="updateForm.get('phone')?.invalid"
+              >{{ requiredFieldMarker }}</span
+            ></label
+          >
+          <input
+            type="text"
+            formControlName="phone"
+            class="form-control"
+            placeholder="Enter your phone number"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              updateForm.invalid &&
+              (updateForm.get('phone')?.dirty ||
+                updateForm.get('phone')?.touched)
+            "
+          >
+            <p *ngIf="updateForm.get('phone')?.hasError('required')">
+              Phone number is required.
+            </p>
+            <p *ngIf="updateForm.get('phone')?.hasError('maxlength')">
+              Cannot have more than 16 characters.
+            </p>
+            <p *ngIf="updateForm.get('phone')?.hasError('pattern')">
+              Invalid phone number. Only numbers allowed.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="disableSubmitBtn"
+          >
+            Update
+          </button>
+          <p
+            class="text-danger pt-2"
+            *ngIf="updateForm.invalid || updateForm.untouched"
+          >
+            {{ emptyFormMsg }}
+          </p>
+        </div>
+      </form>
     </div>
   </div>
-  
+</div>

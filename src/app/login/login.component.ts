@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
-import { NavbarService } from '../shared/services/navbar.service';
 import { UserHttpService } from '../shared/services/user-http.service';
 
 @Component({
@@ -17,9 +16,15 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   disableSubmitBtn = false;
 
-  constructor(private userService: UserHttpService,
-              private navlink: NavbarService,
-              private redirect: Router) {
+  constructor(
+    private userService: UserHttpService,
+    private redirect: Router
+  ) {}
+
+  ngDoCheck(): void {
+    if (localStorage.getItem('clientPass')) {
+      this.redirect.navigate(['/accounts']);
+    }
   }
 
   ngOnInit(): void {
@@ -34,15 +39,17 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(64),
-        Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$')
+        Validators.pattern(
+          '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$'
+        ),
       ]),
     });
   }
 
   submitForm(): void {
     if (this.loginForm.invalid) {
-      this.emptyFormMsg = "Please fill out the form.";
-      this.requiredMarker = "*";
+      this.emptyFormMsg = 'Please fill out the form.';
+      this.requiredMarker = '*';
       return;
     }
 
@@ -55,26 +62,35 @@ export class LoginComponent implements OnInit {
 
   captureResult(result: any): void {
     // Cache JWT to client.
-    localStorage.setItem("clientPass", result["token"]);
-    this.navlink.isLoginViewable = false;
-    this.navlink.isProfileViewable = true;
-    this.redirect.navigate(['/home']);
+    localStorage.setItem('clientPass', result['token']);
   }
 
   loginUser(): void {
     // Perform request.
-    this.userService.loginUser({
-      username: this.userDetails.username.value.toLowerCase(),
-      password: this.userDetails.password.value,
-    })
-    .pipe(take(1), catchError(err => throwError(err)))
-    .subscribe(
-      (result) => this.captureResult(result),
-      (err: any) => {
-        this.disableSubmitBtn = false;
-        this.loginForm.markAsUntouched();
-        this.loginForm.enable();
-      }
-    );
+    this.userService
+      .loginUser({
+        username: this.userDetails.username.value.toLowerCase(),
+        password: this.userDetails.password.value,
+      })
+      .pipe(
+        take(1),
+        catchError((err) => throwError(err))
+      )
+      .subscribe(
+        (result) => this.captureResult(result),
+        (err: any) => {
+          this.disableSubmitBtn = false;
+          this.loginForm.markAsUntouched();
+          this.loginForm.enable();
+
+          // let testJWT = {
+          //   token:
+          //     'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.' +
+          //     'eyJzdWIiOiJ0ZXN0LXN1YiIsInVzZXJJZCI6IjEiLCJ1c2VybmFtZSI6InVzZXItdGVzdCJ9.' +
+          //     'o652LJ9eVSaHG5YxtqGyXYv0-31WB6HZMOcEb7ghE8qqzI9s9nxGULjXNIQmlnBhwPL68fbsdyyWg2XpZQtQeA',
+          // };
+          // this.captureResult(testJWT);
+        }
+      );
   }
 }
