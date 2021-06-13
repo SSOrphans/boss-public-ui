@@ -1,9 +1,7 @@
 <div class="d-flex align-items-center login-bg">
-  <div class="flex-column d-inline-flex mr-5 pr-3 login-position">
-    <div class="flex-row">
-      <h2>Login</h2>
-    </div>
+  <div class="flex-column d-inline-flex mr-5 login-position">
     <div class="card shadow bg-light flex-row">
+      <h2 class="card-header border-0">Login</h2>
       <form class="card-body" [formGroup]="loginForm" (ngSubmit)="submitForm()">
         <div class="form-group">
           <label>Username</label>
@@ -76,10 +74,8 @@
           >
             Login
           </button>
-          <button class="btn mr-3 p-0" routerLink="/register">
-            Register
-          </button>
-          <button class="btn mr-2 p-0" routerLink="/forgotpassword">
+          <button class="btn mr-3 p-0" routerLink="/register">Register</button>
+          <button class="btn p-0" routerLink="/forgotpassword">
             Forgot your password?
           </button>
           <p

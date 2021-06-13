@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
-import { NavbarService } from '../shared/services/navbar.service';
 import { UserHttpService } from '../shared/services/user-http.service';
 
 @Component({
@@ -19,7 +18,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserHttpService,
-    private navlink: NavbarService,
     private redirect: Router
   ) {}
 
@@ -84,11 +82,14 @@ export class LoginComponent implements OnInit {
           this.disableSubmitBtn = false;
           this.loginForm.markAsUntouched();
           this.loginForm.enable();
-          
-          // localStorage.setItem(
-          //   'clientPass',
-          //   'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOiIxIn0.b0lpgg9kledCj3lJQDeEEAcaJO7nom68AAeegE6YEVZ_ZyugvHrr_IQwLkGLhaDENOIddIBQ3gpmBUs2T6bc-Q'
-          // );
+
+          let testJWT = {
+            token:
+              'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.' +
+              'eyJzdWIiOiJ0ZXN0LXN1YiIsInVzZXJJZCI6IjEiLCJ1c2VybmFtZSI6InVzZXItdGVzdCJ9.' +
+              'o652LJ9eVSaHG5YxtqGyXYv0-31WB6HZMOcEb7ghE8qqzI9s9nxGULjXNIQmlnBhwPL68fbsdyyWg2XpZQtQeA',
+          };
+          this.captureResult(testJWT);
         }
       );
   }
