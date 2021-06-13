@@ -1,19 +1,68 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary ">
-    <div>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login" *ngIf="navlink.isLoginViewable">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/profile" *ngIf="navlink.isProfileViewable">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" (click)="onLogout()" *ngIf="!navlink.isLoginViewable">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  
+<nav
+  class="sticky-top navbar navbar-expand-md navbar-dark"
+  style="background-color: #125d98; min-height: 10vh;"
+>
+  <div class="nav-item">
+    <a class="nav-link text-light font-weight-bold h4 p-0 mr-5" routerLink="/home"
+      >Bank of Smoothstack</a
+    >
+  </div>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarContent"
+    (click)="isCollapsed = !isCollapsed"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div
+    class="collapse navbar-collapse justify-content-between"
+    id="navbarContent"
+    [ngbCollapse]="isCollapsed"
+  >
+    <ul class="navbar-nav align-items-end">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/profile"
+          *ngIf="navlink.isProfileViewable"
+          >Profile</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/accounts"
+          *ngIf="navlink.isAccountsViewable"
+          >Accounts</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/loans" *ngIf="navlink.isLoansViewable"
+          >Loans</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/cards" *ngIf="navlink.isCardsViewable"
+          >Cards</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav align-items-end">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login" *ngIf="navlink.isLoginViewable"
+          >Login</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/home"
+          (click)="onLogout()"
+          *ngIf="navlink.isLogoutViewable"
+          >Logout</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>

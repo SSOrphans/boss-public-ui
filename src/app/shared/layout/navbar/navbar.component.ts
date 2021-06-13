@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NavbarService } from '../../services/navbar.service';
 
 @Component({
@@ -8,13 +7,33 @@ import { NavbarService } from '../../services/navbar.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(public navlink: NavbarService, private redirect: Router) {}
+  isCollapsed: boolean;
+  constructor(public navlink: NavbarService) {
+    this.isCollapsed = true;
+  }
 
   ngOnInit(): void {}
 
+  ngDoCheck(): void {
+    if(!localStorage.getItem('clientPass')) {
+      this.navlink.isLoginViewable = true;
+      this.navlink.isLogoutViewable = false;
+      this.navlink.isProfileViewable = false;
+      this.navlink.isAccountsViewable = false;
+      this.navlink.isLoansViewable = false;
+      this.navlink.isCardsViewable = false;
+    }
+    else{
+      this.navlink.isLoginViewable = false;
+      this.navlink.isLogoutViewable = true;
+      this.navlink.isProfileViewable = true;
+      this.navlink.isAccountsViewable = true;
+      this.navlink.isLoansViewable = true;
+      this.navlink.isCardsViewable = true;
+    }
+  }
+
   onLogout() {
     localStorage.removeItem("clientPass");
-    this.navlink.isLoginViewable = true;
-    this.navlink.isProfileViewable = false;
   }
 }

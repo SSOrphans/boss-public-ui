@@ -41,6 +41,12 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  ngAfterContentChecked(): void {
+    if(localStorage.getItem('clientPass')) {
+      this.redirect.navigate(['/home']);
+    }
+  }
+
   submitForm(): void {
     if (this.registerForm.invalid) {
       this.emptyFormMsg = 'Please fill out the form.';

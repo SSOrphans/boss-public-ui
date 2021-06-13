@@ -12,30 +12,30 @@ export class UserHttpService {
   }
 
   loginUser(loginDetails: object): Observable<any> {
-    return this.http.post("http://localhost:8080/login", loginDetails);
+    return this.http.post(`${environment.apiUrl}/login`, loginDetails);
   }
 
   registerUser(user: object): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/users/registration`, user);
+    return this.http.post(`${environment.apiUrl}/api/v1/users/registration`, user);
   }
 
   forgotPass(email: object): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/user/email`, email);
+    return this.http.post(`${environment.apiUrl}/api/v1/user/email`, email);
   }
 
   resetPass(jwt: object): Observable<any>{
-    return this.http.put(`${environment.apiUrl}/user/password`, jwt)
+    return this.http.put(`${environment.apiUrl}/api/v1/user/password`, jwt)
   }
 
   getUserProfileInfo(userID: number): Observable<ProfileInfo> {
     // TODO: login
     // user id is hardcoded to test endpoint
-    return this.http.get(`${environment.apiUrl}/users/${userID}`);
+    return this.http.get(`${environment.apiUrl}/api/v1/users/${userID}`);
   }
 
   updateProfile(userID: number, user: object): Observable<any> {
     // TODO: login
     // user id is hardcoded to test endpoint
-    return this.http.put(`${environment.apiUrl}/users/${userID}`, user);
+    return this.http.put(`${environment.apiUrl}/api/v1/users/${userID}`, user);
   }
 }

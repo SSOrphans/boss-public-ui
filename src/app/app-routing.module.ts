@@ -23,11 +23,11 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
 
-  { path: 'login/register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent },
 
-  { path: 'login/forgotpassword', component: ForgotPasswordComponent },
+  { path: 'forgotpassword', component: ForgotPasswordComponent },
 
-  { path: 'login/resetpassword', component: ResetPasswordComponent },
+  { path: 'resetpassword', component: ResetPasswordComponent },
 
   {
     path: 'profile',
@@ -37,9 +37,9 @@ const routes: Routes = [
       { path: 'update', component: UpdateProfileComponent },
     ],
   },
-  { path: 'users/:id/accounts', component: AccountsListComponent },
-  { path: 'users/:id/cards', component: CardListComponent },
-  { path: 'users/:id/loans', component: LoanViewComponent },
+  { path: 'cards', component: CardListComponent },
+  { path: 'accounts', component: AccountsListComponent },
+  { path: 'loans', component: LoanViewComponent },
   { path: 'accounts/:id', component: AccountTransactionViewComponent },
   {
     path: 'accounts/:id/transactions',

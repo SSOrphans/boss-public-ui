@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CardHttpService } from 'src/app/shared/services/card-http.service';
 import { typeName } from '../../enumerations/card-type.enum';
@@ -16,15 +17,30 @@ export class CardListComponent implements OnInit, OnChanges {
   cards:  Card[] = [];
   selected: Card | undefined
   closeResult: string = "";
+  jwtDecoder: JwtHelperService;
 
   constructor(private router:       Router,
               private route:        ActivatedRoute,
               private httpService:  CardHttpService,
               private modalService: NgbModal)
-  { }
+  {
+    this.jwtDecoder = new JwtHelperService();
+  }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.params.id;
+    this.loadCards();
+  }
+
+  ngDoCheck(): void {
+    if (!localStorage.getItem('clientPass'))
+      this.router.navigate(['/home']);
+  }
+
+  ngAfterContentInit(): void {
+    this.userId = this.jwtDecoder.decodeToken(
+      localStorage.getItem("clientPass")?.valueOf()
+    ).userId;
     this.loadCards();
   }
 
@@ -52,6 +68,9 @@ export class CardListComponent implements OnInit, OnChanges {
   }
 
   loadCards(): void {
+    if (this.userId === undefined)
+      return;
+      
     try {
       this.httpService.getCardsForUser(this.userId)
         .subscribe(this.showCards, () => {});

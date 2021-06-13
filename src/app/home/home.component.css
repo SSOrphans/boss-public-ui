@@ -1,0 +1,12 @@
+.ng-carousel-template-img {
+    object-fit: cover;
+    opacity: 0.7;
+    min-height: 300px;
+    height: 95vh;
+    width: 100%;
+    z-index: 1;
+}
+
+.homepage-bg {
+    height: 95vh;
+}

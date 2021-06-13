@@ -1,6 +1,6 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   faFilter,
   faSortDown,
@@ -20,7 +20,8 @@ import { LoanType } from '../../models/loanType';
 export class LoanTableComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private loanService: LoanService
+    private loanService: LoanService,
+    private redirect: Router
   ) {}
 
   loans: Loan[] = [];
@@ -42,6 +43,13 @@ export class LoanTableComponent implements OnInit {
     this.options.sortBy = 'loanNumber';
     this.initLoans();
   }
+
+  ngDoCheck(): void {
+    if (!localStorage.getItem('clientPass')) {
+      this.redirect.navigate(['/home']);
+    }
+  }
+  
   initLoanTypes(): void {
     this.loanService.getAllLoanTypes().subscribe(
       (data: LoanType[]) => {
@@ -57,8 +65,11 @@ export class LoanTableComponent implements OnInit {
     this.initLoanTypes();
     let id = this.route.snapshot.params.id;
     this.options.keyword = this.searchBar.value;
-   
-    this.options.filter = this.selectedFilter === "" ? "" :"LOAN_".concat(this.selectedFilter.toUpperCase());
+
+    this.options.filter =
+      this.selectedFilter === ''
+        ? ''
+        : 'LOAN_'.concat(this.selectedFilter.toUpperCase());
     this.loanService.getUserLoans(id, this.options).subscribe(
       (data: any) => {
         this.loans = data.content;
@@ -121,7 +132,7 @@ export class LoanTableComponent implements OnInit {
     this.initLoans();
   }
 
-  onLimitSelect(){
+  onLimitSelect() {
     this.options.page = 1;
     this.initLoans();
   }

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserHttpService } from 'src/app/shared/services/user-http.service';
 import { take, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,7 +17,7 @@ export class ForgotPasswordComponent implements OnInit {
   emptyFormMsg?: string;
   isResetComplete: boolean;
 
-  constructor(private userService: UserHttpService) {
+  constructor(private userService: UserHttpService, private redirect: Router) {
     this.isResetComplete = false;
     this.disableSubmitBtn = false;
     this.resetForm = new FormGroup({
@@ -25,6 +26,12 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  ngDoCheck(): void {
+    if (localStorage.getItem('clientPass')) {
+      this.redirect.navigate(['/home']);
+    }
+  }
 
   get userInput(): any {
     return this.resetForm.controls;

@@ -1,2 +1,13 @@
-<app-transaction-queries (searchEventFromQueriesComponent)="onSearch($event)" (filterEventFromQueriesComponent)="onFilter($event)"></app-transaction-queries>
-<app-transaction-table [keywordToTableComponent]="keywordFromParent" [filterToTableComponent]="filterFromParent" [accountId]="accountId"></app-transaction-table>
+<div class="d-flex justify-content-center my-5 animate-fade">
+  <div class="wrapper col-10">
+    <app-transaction-queries
+      (searchEventFromQueriesComponent)="onSearch($event)"
+      (filterEventFromQueriesComponent)="onFilter($event)"
+    ></app-transaction-queries>
+    <app-transaction-table
+      [keywordToTableComponent]="keywordFromParent"
+      [filterToTableComponent]="filterFromParent"
+      [accountId]="accountId"
+    ></app-transaction-table>
+  </div>
+</div>
