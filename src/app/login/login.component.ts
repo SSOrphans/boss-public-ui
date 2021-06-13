@@ -83,13 +83,13 @@ export class LoginComponent implements OnInit {
           this.loginForm.markAsUntouched();
           this.loginForm.enable();
 
-          let testJWT = {
-            token:
-              'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.' +
-              'eyJzdWIiOiJ0ZXN0LXN1YiIsInVzZXJJZCI6IjEiLCJ1c2VybmFtZSI6InVzZXItdGVzdCJ9.' +
-              'o652LJ9eVSaHG5YxtqGyXYv0-31WB6HZMOcEb7ghE8qqzI9s9nxGULjXNIQmlnBhwPL68fbsdyyWg2XpZQtQeA',
-          };
-          this.captureResult(testJWT);
+          // let testJWT = {
+          //   token:
+          //     'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.' +
+          //     'eyJzdWIiOiJ0ZXN0LXN1YiIsInVzZXJJZCI6IjEiLCJ1c2VybmFtZSI6InVzZXItdGVzdCJ9.' +
+          //     'o652LJ9eVSaHG5YxtqGyXYv0-31WB6HZMOcEb7ghE8qqzI9s9nxGULjXNIQmlnBhwPL68fbsdyyWg2XpZQtQeA',
+          // };
+          // this.captureResult(testJWT);
         }
       );
   }

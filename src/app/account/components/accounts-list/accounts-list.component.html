@@ -1,41 +1,77 @@
-<div>
+<div class="d-flex justify-content-center my-5 animate-fade">
+  <div class="wrapper col-10">
+    <div class="card shadow">
+      <h2 class="card-header">Saving Accounts</h2>
+      <div class="card-body">
+        <ul class="list-group">
+          <li
+            *ngFor="let account of savingAccount"
+            [ngClass]="{
+              'list-group-item mb-1 border-top d-flex justify-content-between account-item': true,
+              pending: account.confirmed === false
+            }"
+            (click)="onAccountSelect(account.id)"
+          >
+            <span>{{ account.name }} - {{ account.id }}</span>
+            <span *ngIf="account.confirmed"
+              >${{ account.balance.toFixed(2) }}</span
+            >
+            <span *ngIf="!account.confirmed">Pending</span>
+          </li>
+        </ul>
+        <ul class="list-group">
+          <li
+            class="
+              list-group-item
+              mb-1
+              mt-1
+              list-group-item-primary
+              border-top border-primary
+              account-create
+            "
+            (click)="onApplyAccount(1)"
+          >
+            Add a new Account
+          </li>
+        </ul>
+      </div>
+    </div>
 
-  <h2>Saving Accounts</h2>
-  <ul class="list-group">
-    <li *ngFor="let account of savingAccount"
-        [ngClass]="{
-        'list-group-item mb-1 border-top d-flex justify-content-between account-item' : true,
-        'pending': account.confirmed === false
-        }"
-        (click)="onAccountSelect(account.id)">
-      <span>{{account.name}} - {{account.id}}</span>
-      <span *ngIf="account.confirmed">${{account.balance.toFixed(2)}}</span>
-      <span *ngIf="!account.confirmed">Pending</span>
-    </li>
-  </ul>
-  <ul class="list-group">
-    <li class="list-group-item mb-1 mt-1 list-group-item-primary border-top border-primary account-create"
-        (click)="onApplyAccount(1)">Add a new Account
-    </li>
-  </ul>
-
-  <h2 class="mt-5">Checking Accounts</h2>
-  <ul class="list-group">
-    <li *ngFor="let account of checkingAccount"
-        [ngClass]="{
-        'list-group-item mb-1 border-top d-flex justify-content-between account-item' : true,
-        'pending': account.confirmed === false
-        }"
-        (click)="onAccountSelect(account.id)">
-      <span>{{account.name}} - {{account.id}}</span>
-      <span *ngIf="account.confirmed">${{account.balance.toFixed(2)}}</span>
-      <span *ngIf="!account.confirmed">Pending</span>
-    </li>
-  </ul>
-  <ul class="list-group">
-    <li class="list-group-item mb-1 mt-1 list-group-item-primary border-top border-primary account-create"
-        (click)="onApplyAccount(2)">Add a new Account
-    </li>
-  </ul>
-
+    <div class="card shadow mt-5">
+      <h2 class="card-header">Checking Accounts</h2>
+      <div class="card-body">
+        <ul class="list-group">
+          <li
+            *ngFor="let account of checkingAccount"
+            [ngClass]="{
+              'list-group-item mb-1 border-top d-flex justify-content-between account-item': true,
+              pending: account.confirmed === false
+            }"
+            (click)="onAccountSelect(account.id)"
+          >
+            <span>{{ account.name }} - {{ account.id }}</span>
+            <span *ngIf="account.confirmed"
+              >${{ account.balance.toFixed(2) }}</span
+            >
+            <span *ngIf="!account.confirmed">Pending</span>
+          </li>
+        </ul>
+        <ul class="list-group">
+          <li
+            class="
+              list-group-item
+              mb-1
+              mt-1
+              list-group-item-primary
+              border-top border-primary
+              account-create
+            "
+            (click)="onApplyAccount(2)"
+          >
+            Add a new Account
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
