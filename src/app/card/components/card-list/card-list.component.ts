@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CardHttpService } from 'src/app/shared/services/card-http.service';
 import { typeName } from '../../enumerations/card-type.enum';
 import { Card } from '../../models/card.model';
@@ -13,10 +14,13 @@ import { UserCardsResult } from '../../models/user-cards-result.model';
 export class CardListComponent implements OnInit, OnChanges {
   userId: number = 0;
   cards:  Card[] = [];
+  selected: Card | undefined
+  closeResult: string = "";
 
-  constructor(private router:      Router,
-              private route:       ActivatedRoute,
-              private httpService: CardHttpService)
+  constructor(private router:       Router,
+              private route:        ActivatedRoute,
+              private httpService:  CardHttpService,
+              private modalService: NgbModal)
   { }
 
   ngOnInit(): void {
@@ -28,8 +32,23 @@ export class CardListComponent implements OnInit, OnChanges {
     this.loadCards();
   }
 
-  onCardSelect(cardId: number) {
-    this.router.navigate([`cards/${cardId}`]);
+  onCardSelect(card: Card | undefined, content: any) {
+    this.selected = card;
+    this.modalService.open(content, { ariaLabelledBy: "cardModalTitle", centered: true }).result.then(result => {
+      this.closeResult = `Closed with: ${result}`;
+    }, reason => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    }
+
+    return `with: ${reason}`;
   }
 
   loadCards(): void {
@@ -50,12 +69,24 @@ export class CardListComponent implements OnInit, OnChanges {
     return typeName(card.type);
   }
 
-  displayCardNumber(card: Card): string {
+  displayNameOnCard(card: Card | undefined): string {
+    if (card === undefined)
+      return "";
+
+    // Place holder!
+    return "Sora Katadzuma";
+  }
+
+  displayCardNumber(card: Card | undefined): string {
+    if (card === undefined)
+      return "";
     const number = "xxxx-xxxx-xxxx-";
     return number + card.lastFour;
   }
 
-  displayCardStatus(card: Card): string {
+  displayCardStatus(card: Card | undefined): string {
+    if (card === undefined)
+      return "";
     let result = "";
     if (card.stolen)
       result = "Stolen";
@@ -66,8 +97,10 @@ export class CardListComponent implements OnInit, OnChanges {
     return result;
   }
 
-  displayCardActivation(card: Card): string {
-    console.log(card.activatedSince);
+  displayCardActivation(card: Card | undefined): string {
+    if (card === undefined)
+      return "";
+
     if (card.activatedSince === 0)
       return "Inactive";
 
@@ -77,14 +110,16 @@ export class CardListComponent implements OnInit, OnChanges {
     return result;
   }
 
-  displayCardExpiration(card: Card): string {
-    console.log(card.expirationDate);
+  displayCardExpiration(card: Card | undefined): string {
+    if (card === undefined)
+      return "";
+
     if (card.expirationDate === 0)
       return "Inactive";
 
     const date = new Date(card.expirationDate);
     let month = '' + date.getMonth();
-    const year = '' + date.getFullYear();
+    const year = ('' + date.getFullYear()).substr(2);
     if (month.length < 2)
       month = '0' + month;
 

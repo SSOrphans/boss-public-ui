@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Card } from 'src/app/card/models/card.model';
 import { UserCardsResult } from 'src/app/card/models/user-cards-result.model';
 

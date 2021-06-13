@@ -17,7 +17,6 @@ import { AccountsListComponent } from './account/components/accounts-list/accoun
 import { AccountTransactionViewComponent } from './account-transaction/components/account-transaction-view/account-transaction-view.component';
 import { LoanViewComponent } from './loan/components/loan-view/loan-view.component';
 import { CardListComponent } from './card/components/card-list/card-list.component';
-import { CardViewComponent } from './card/components/card-view/card-view.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -42,7 +41,6 @@ const routes: Routes = [
   { path: 'users/:id/cards', component: CardListComponent },
   { path: 'users/:id/loans', component: LoanViewComponent },
   { path: 'accounts/:id', component: AccountTransactionViewComponent },
-  { path: 'cards/:id', component: CardViewComponent },
   {
     path: 'accounts/:id/transactions',
     component: TransactionViewComponent,
