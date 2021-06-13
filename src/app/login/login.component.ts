@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   ngDoCheck(): void {
     if (localStorage.getItem('clientPass')) {
-      this.redirect.navigate(['/home']);
+      this.redirect.navigate(['/accounts']);
     }
   }
 
