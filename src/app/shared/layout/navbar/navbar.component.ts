@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
       this.navlink.isProfileViewable = false;
       this.navlink.isAccountsViewable = false;
       this.navlink.isLoansViewable = false;
+      this.navlink.isCardsViewable = false;
     }
     else{
       this.navlink.isLoginViewable = false;
@@ -28,6 +29,7 @@ export class NavbarComponent implements OnInit {
       this.navlink.isProfileViewable = true;
       this.navlink.isAccountsViewable = true;
       this.navlink.isLoansViewable = true;
+      this.navlink.isCardsViewable = true;
     }
   }
 

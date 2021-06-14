@@ -16,6 +16,7 @@ import { ResetPasswordComponent } from './login/reset-password/reset-password.co
 import { AccountsListComponent } from './account/components/accounts-list/accounts-list.component';
 import { AccountTransactionViewComponent } from './account-transaction/components/account-transaction-view/account-transaction-view.component';
 import { LoanViewComponent } from './loan/components/loan-view/loan-view.component';
+import { CardListComponent } from './card/components/card-list/card-list.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
       { path: 'update', component: UpdateProfileComponent },
     ],
   },
+  { path: 'cards', component: CardListComponent },
   { path: 'accounts', component: AccountsListComponent },
   { path: 'loans', component: LoanViewComponent },
   { path: 'accounts/:id', component: AccountTransactionViewComponent },

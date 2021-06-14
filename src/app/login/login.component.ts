@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
     // Perform request.
     this.userService
       .loginUser({
-        username: this.userDetails.username.value.toLowerCase(),
+        username: this.userDetails.username.value,
         password: this.userDetails.password.value,
       })
       .pipe(

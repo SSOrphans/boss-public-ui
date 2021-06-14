@@ -1,0 +1,67 @@
+<div class="d-flex flex-column align-items-center">
+  <h2 class="py-5">Cards</h2>
+  <div class="row align-items-center justify-content-center">
+    <div *ngFor="let card of cards" class="col-sm-auto">
+      <div class="card shadow p-3 bg-white rounded" (click)="onCardSelect(card, cardModal)">
+        <div class="card-body">
+          <h5 class="card-title">{{ displayCardNumber(card) }}</h5>
+          <div class="row">
+            <span class="col card-subtitle mb-2 text-muted">
+              {{ displayCardType(card) }}
+            </span>
+            <span class="col card-subtitle mb-2 text-muted">
+              {{ displayCardStatus(card) }}
+            </span>
+          </div>
+          <p class="card-text">
+            Active Since: {{ displayCardActivation(card) }} <br>
+            Expiration:   {{ displayCardExpiration(card) }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #cardModal let-modal>
+  <div class="modal-header">
+    <div class="col">
+      <p class="modal-title" id="cardModalTitle">{{ displayNameOnCard(selected) }}</p>
+    </div>
+    <div class="col">
+      <p class="modal-title" id="cardModalTitle">{{ displayCardNumber(selected) }}</p>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row justify-content-between">
+      <div class="col">
+        <p>Card#: <span class="text-muted">{{ selected?.id }}</span></p>
+        <p>Account#: {{ undefined }}</p>
+      </div>
+      <div class="col">
+        <p>Created: <span class="text-muted">{{ displayCardActivation(selected) }}</span></p>
+        <p>Activated: <span class="text-muted">{{ displayCardActivation(selected) }}</span></p>
+        <p>Expires: <span class="text-muted">{{ displayCardExpiration(selected) }}</span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        Confirmed
+        <span *ngIf="selected?.confirmed">&#x2713;</span>
+        <span *ngIf="!selected?.confirmed">&times;</span>
+      </div>
+      <div class="col">
+        Active
+        <span *ngIf="selected?.active">&#x2713;</span>
+        <span *ngIf="!selected?.active">&times;</span>
+      </div>
+      <div class="col">
+        Stolen
+        <span *ngIf="selected?.stolen">&#x2713;</span>
+        <span *ngIf="!selected?.stolen">&times;</span>
+      </div>
+    </div>
+  </div>
+</ng-template>

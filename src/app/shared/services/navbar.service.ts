@@ -9,6 +9,7 @@ export class NavbarService {
   isProfileViewable: boolean;
   isAccountsViewable: boolean;
   isLoansViewable: boolean;
+  isCardsViewable: boolean;
 
   constructor() {
     this.isLoginViewable = true;
@@ -16,5 +17,6 @@ export class NavbarService {
     this.isProfileViewable = false;
     this.isAccountsViewable = false;
     this.isLoansViewable = false;
+    this.isCardsViewable = false;
   }
 }
