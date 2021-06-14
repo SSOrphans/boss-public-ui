@@ -29,13 +29,13 @@ describe('ViewProfileComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('call service onInit', () => {
+  it('call user service', () => {
     let userService = TestBed.inject(UserHttpService);
     spyOn(userService, 'getUserProfileInfo').and.callFake(() => {
       return of();
     });
 
-    component.ngOnInit();
+    component.ngAfterContentInit();
     expect(userService.getUserProfileInfo).toHaveBeenCalled();
   });
 

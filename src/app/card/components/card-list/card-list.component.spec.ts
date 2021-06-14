@@ -1,4 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CardHttpService } from 'src/app/shared/services/card-http.service';
 
 import { CardListComponent } from './card-list.component';
 
@@ -8,7 +11,9 @@ describe('CardListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CardListComponent ]
+      imports: [RouterTestingModule, HttpClientTestingModule],
+      declarations: [ CardListComponent ],
+      providers: [CardHttpService],
     })
     .compileComponents();
   });

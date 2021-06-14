@@ -4,6 +4,7 @@ import { UserHttpService } from 'src/app/shared/services/user-http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, take } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-update-profile',
@@ -15,12 +16,15 @@ export class UpdateProfileComponent implements OnInit {
   requiredFieldMarker?: string;
   updateForm!: FormGroup;
   disableSubmitBtn: boolean = false;
+  jwtDecoder: JwtHelperService;
 
   constructor(
     private userService: UserHttpService,
     private redirect: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.jwtDecoder = new JwtHelperService();
+  }
 
   ngOnInit(): void {
     this.updateForm = new FormGroup({
@@ -70,7 +74,9 @@ export class UpdateProfileComponent implements OnInit {
       return;
     }
 
-    this.updateProfile();
+    if (localStorage.getItem('clientPass')) {
+      this.updateProfile();
+    }
   }
 
   get userInput() {
@@ -80,18 +86,21 @@ export class UpdateProfileComponent implements OnInit {
   updateProfile() {
     this.disableSubmitBtn = true;
     this.updateForm.disable();
-    // TODO: login
-    // user id is hardcoded to test endpoint
     this.userService
-      .updateProfile(1, {
-        email: this.userInput.email.value.toLowerCase(),
-        fullName: this.userInput.fullName.value,
-        address: this.userInput.address.value,
-        city: this.userInput.city.value,
-        state: this.userInput.state.value,
-        zip: this.userInput.zip.value,
-        phone: this.userInput.phone.value,
-      })
+      .updateProfile(
+        this.jwtDecoder.decodeToken(
+          localStorage.getItem('clientPass')?.valueOf()
+        ).userId,
+        {
+          email: this.userInput.email.value.toLowerCase(),
+          fullName: this.userInput.fullName.value,
+          address: this.userInput.address.value,
+          city: this.userInput.city.value,
+          state: this.userInput.state.value,
+          zip: this.userInput.zip.value,
+          phone: this.userInput.phone.value,
+        }
+      )
       .pipe(
         take(1),
         catchError((err) => {
