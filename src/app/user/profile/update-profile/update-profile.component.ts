@@ -112,7 +112,6 @@ export class UpdateProfileComponent implements OnInit {
           this.redirect.navigate(['/profile'], { relativeTo: this.route });
         },
         (err) => {
-          // TODO: redirect to 404 not found
           console.log(err);
         }
       );
