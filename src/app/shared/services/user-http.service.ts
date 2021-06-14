@@ -12,7 +12,8 @@ export class UserHttpService {
   }
 
   loginUser(loginDetails: object): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/login`, loginDetails);
+    // return this.http.post(`${environment.apiUrl}/login`, loginDetails);
+    return this.http.post(`http://localhost:8080/login`, loginDetails);
   }
 
   registerUser(user: object): Observable<any> {
