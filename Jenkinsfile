@@ -21,7 +21,7 @@ pipeline {
         stage('Push to S3') {
             steps {
                 echo "Pushing to s3"
-                sh 'aws s3 cp --recursive dist/$serviceName s3://www.bankofsmoothstack.com/'
+                sh 'aws s3 sync dist/$serviceName s3://www.bankofsmoothstack.com/'
             }
         }
     }
