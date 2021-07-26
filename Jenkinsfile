@@ -13,7 +13,7 @@ node {
                     nodejs('NodeJS') {
                         echo "Building $serviceName"
                         sh 'npm install'
-                        sh 'cd src/environments && echo "export const environment = { production: true, apiUrl: \\\"http://$AWS_ELB_DNS:8080\\\", };" > environment.prod.ts'
+                        sh 'cd src/environments && echo "export const environment = { production: true, apiUrl: \\\"http://$AWS_ELB_DNS\\\", };" > environment.prod.ts'
                         sh 'ng build --prod --base-href /'
                     }
                 }
